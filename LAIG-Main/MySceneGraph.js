@@ -835,7 +835,7 @@ class MySceneGraph {
         var grandChildren = [];
 
         // Any number of animations.
-        for (var i = 0; i < children.length; i++) {
+        for (let i = 0; i < children.length; i++) {
 
             if (children[i].nodeName != "animation") {
                 this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
@@ -847,15 +847,28 @@ class MySceneGraph {
             if (animationID == null)
                 return "no ID defined for animation";
 
-             // Checks for repeated IDs.
-             if (this.animations[animationID] != null)
+            // Checks for repeated IDs.
+            if (this.animations[animationID] != null)
                 return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
 
             grandChildren = children[i].children;
             if (grandChildren.length == 0)
                 return "no keyframe defined for animation " + animationID;
 
-            // Specifications for the current animation.
+            // Any number of keyframes.
+            for (let j = 0; j < grandChildren.length; j++) {
+                if (grandChildren[i].nodeName != "keyframe") {
+                    this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                    continue;
+                }
+
+                // Get id of the current animation.
+                var animationID = this.reader.getString(children[i], 'instant');
+                if (animationID == null)
+                    return "no instant defined for animation";
+
+                //TODO finish parseAnimations and parseXMLFile
+            }
 
         }
 
