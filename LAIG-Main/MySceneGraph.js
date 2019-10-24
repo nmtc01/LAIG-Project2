@@ -749,6 +749,7 @@ class MySceneGraph {
         this.log("Parsed materials");
         return null;
     }
+
     /**
      * Parses the <transformations> block.
      * @param {transformations block element} transformationsNode
@@ -820,6 +821,42 @@ class MySceneGraph {
         this.log("Parsed transformations");
 
         return null;
+    }
+
+    /**
+     * Parses the <animations> block.
+     * @param {animations block element} animationsNode
+     */
+    parseAnimations(animationsNode) {
+        var children = animationsNode.children;
+
+        this.animations = [];
+
+        var grandChildren = [];
+
+        // Any number of animations.
+        for (var i = 0; i < children.length; i++) {
+
+            if (children[i].nodeName != "animation") {
+                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                continue;
+            }
+
+            // Get id of the current animation.
+            var animationID = this.reader.getString(children[i], 'id');
+            if (animationID == null)
+                return "no ID defined for animation";
+
+             // Checks for repeated IDs.
+             if (this.animations[animationID] != null)
+                return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
+
+            grandChildren = children[i].children;
+
+            // Specifications for the current animation.
+
+        }
+
     }
 
     /**
