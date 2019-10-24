@@ -852,11 +852,16 @@ class MySceneGraph {
                 return "ID must be unique for each animation (conflict: ID = " + animationID + ")";
 
             grandChildren = children[i].children;
+            if (grandChildren.length == 0)
+                return "no keyframe defined for animation " + animationID;
 
             // Specifications for the current animation.
 
         }
 
+        this.log("Parsed animations");
+
+        return null;
     }
 
     /**
