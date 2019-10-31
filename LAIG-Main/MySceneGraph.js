@@ -795,12 +795,11 @@ class MySceneGraph {
                         transfMatrix = mat4.translate(transfMatrix, transfMatrix, coordinates);
                         break;
                     case 'scale':
-                        var coordinates = this.parseCoordinates3D(grandChildren[j], "translate transformation for ID " + transformationID);
+                        var coordinates = this.parseCoordinates3D(grandChildren[j], "scale transformation for ID " + transformationID);
                         if (!Array.isArray(coordinates))
                             return coordinates;
                         //update matrix
                         transfMatrix = mat4.scale(transfMatrix, transfMatrix, coordinates);
-
                         break;
                     case 'rotate':
                         var axis = this.reader.getString(grandChildren[j], 'axis');
@@ -831,8 +830,10 @@ class MySceneGraph {
         var children = animationsNode.children;
 
         this.animations = [];
+        this.keyframes = [];
 
         var grandChildren = [];
+        var grandgrandChildren = [];
 
         // Any number of animations.
         for (let i = 0; i < children.length; i++) {
@@ -862,14 +863,62 @@ class MySceneGraph {
                     continue;
                 }
 
-                // Get id of the current animation.
-                var animationID = this.reader.getString(children[i], 'instant');
-                if (animationID == null)
+                // Get instant of the current keyframe.
+                var keyframeInst = this.reader.getString(children[i], 'instant');
+                if (keyframeInst == null)
                     return "no instant defined for animation";
+                
+                grandgrandChildren = grandChildren[i].children;
+                if (grandgrandChildren.length < 3)
+                    return "insufficient transformations defined for keyframe on instant " + keyframeInst;
 
-                //TODO finish parseAnimations and parseXMLFile
+                //Parse transformations
+                //create unit matrix 
+                var transfMatrix = mat4.create();
+
+                //TRANSLATE
+                if (grandgrandChildren[i].nodeName != "translate") {
+                    this.onXMLMinorError("wrong tag <" + grandgrandChildren[i].nodeName + ">");
+                    continue;
+                }
+                var coordinatesTranslate = this.parseCoordinates3D(grandChildren[j], "translate transformation for keyframe on instant " + keyframeInst);
+                if (!Array.isArray(coordinatesTranslate))
+                    return coordinatesTranslate;
+                //update matrix
+                transfMatrix = mat4.translate(transfMatrix, transfMatrix, coordinatesTranslate);
+
+                //ROTATE
+                if (grandgrandChildren[i].nodeName != "rotate") {
+                    this.onXMLMinorError("wrong tag <" + grandgrandChildren[i].nodeName + ">");
+                    continue;
+                }
+                //angle_x
+                var angle_x = this.reader.getString(grandChildren[j], 'angle_x');
+                angle_x = angle_x * Math.PI / 180;
+                //angle_y
+                var angle_y = this.reader.getString(grandChildren[j], 'angle_y');
+                angle_y = angle_y * Math.PI / 180;
+                //angle_z
+                var angle_z = this.reader.getString(grandChildren[j], 'angle_z');
+                angle_z = angle_z * Math.PI / 180;
+                //update matrix
+                transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle_x, this.axisCoords['x']);
+                transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle_y, this.axisCoords['y']);
+                transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle_z, this.axisCoords['z']);
+
+                //SCALE
+                var coordinatesScale = this.parseCoordinates3D(grandChildren[j], "scale transformation for keyframe on instant " + keyframeInst);
+                if (!Array.isArray(coordinatesScale))
+                    return coordinatesScale;
+                //update matrix
+                transfMatrix = mat4.scale(transfMatrix, transfMatrix, coordinatesScale);
+
+                //store keyframe
+                this.keyframes[keyframeInst] = transfMatrix;
             }
 
+            //store animation
+            this.animations[animationID] = this.keyframes;
         }
 
         this.log("Parsed animations");
