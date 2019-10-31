@@ -1193,6 +1193,7 @@ class MySceneGraph {
 
             //save component infos
             var transformationIndex = nodeNames.indexOf("transformation");
+            var animationIndex = nodeNames.indexOf('animationref');
             var materialsIndex = nodeNames.indexOf("materials");
             var textureIndex = nodeNames.indexOf("texture");
             var childrenIndex = nodeNames.indexOf("children");
@@ -1211,7 +1212,7 @@ class MySceneGraph {
                     var transfref = this.reader.getString(grandgrandChildren[0], 'id');
                     //check if that reference exists 
                     if (this.transformations[transfref] == null)
-                        return "Transformation id does has not been declared: " + transfref;
+                        return "Transformation id has not been declared: " + transfref;
                     transformation = this.transformations[transfref];
                 }
                 else {
@@ -1245,6 +1246,17 @@ class MySceneGraph {
                 }
             }
             else return "transformation block must be declared";
+
+            // Animations -- Bloco pode ficar sem conteudo
+            if (animationIndex != -1) {
+                var animation;
+
+                var animref = this.reader.getString(grandChildren[0], 'id');
+                //check if that reference exists 
+                if (this.animations[animref] == null)
+                    return "Animation id has not been declared: " + animref;
+                animation = this.animations[animref];
+            }
 
             // Materials -- Obrigatorio 
             if (materialsIndex != -1) {
@@ -1332,6 +1344,7 @@ class MySceneGraph {
                 visited,
                 component_materials,
                 transformation,
+                animation,
                 texture: {
                     textureref,
                     length_s,
