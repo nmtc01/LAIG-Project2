@@ -1198,9 +1198,8 @@ class MySceneGraph {
             var textureIndex = nodeNames.indexOf("texture");
             var childrenIndex = nodeNames.indexOf("children");
 
-
             // Transformations -- Bloco pode ficar sem conteudo
-            if (transformationIndex != -1) {
+            if (transformationIndex == 0) {
                 grandgrandChildren = grandChildren[transformationIndex].children;
                 var transformation;
 
@@ -1245,21 +1244,22 @@ class MySceneGraph {
                     }
                 }
             }
-            else return "transformation block must be declared";
+            else return "transformation block out of order or not declared";
 
             // Animations -- Bloco pode ficar sem conteudo
-            if (animationIndex != -1) {
-                var animation;
-
+            var animation = null;
+            if (animationIndex == 1) {
                 var animref = this.reader.getString(grandChildren[0], 'id');
                 //check if that reference exists 
                 if (this.animations[animref] == null)
                     return "Animation id has not been declared: " + animref;
                 animation = this.animations[animref];
             }
+            else if (animationIndex != -1)
+                return "animation block out of order";
 
             // Materials -- Obrigatorio 
-            if (materialsIndex != -1) {
+            if ((materialsIndex == 2 && animationIndex == 1) || (materialsIndex == 1 && animationIndex == -1)) {
                 grandgrandChildren = grandChildren[materialsIndex].children;
                 var component_materials = [];
 
@@ -1277,10 +1277,10 @@ class MySceneGraph {
                     } else component_materials.push(this.materials[materialID]);
                 }
             }
-            else return "materials block must be declared";
+            else return "materials block out of order or not declared";
 
             // Texture -- Obrigatorio
-            if (textureIndex != -1) {
+            if ((textureIndex == 3 && animationIndex == 1) || (textureIndex == 2 && animationIndex == -1)) {
                 var length_s = 1;
                 var length_t = 1;
 
@@ -1310,7 +1310,7 @@ class MySceneGraph {
             else return "texture module not declared"
 
             // Children
-            if (childrenIndex != -1) {
+            if ((childrenIndex == 4 && animationIndex == 1) || (childrenIndex == 3 && animationIndex == -1)) {
 
                 grandgrandChildren = grandChildren[childrenIndex].children;
                 if (grandgrandChildren.length == 0)
@@ -1337,7 +1337,9 @@ class MySceneGraph {
 
             }
             else "children block must be declared"
+
             let visited = false;
+
             //store the data and pass it as a structure into the array 
             const component = { //node 
                 componentID,
