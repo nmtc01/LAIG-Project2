@@ -50,21 +50,15 @@
         </transformation>
     </transformations>
 
-    <!-- Bloco pode ser vazio -->
     <animations>
         <animation id="sampleAnim" >
-        <!-- Deve existir pelo menos 1 elemento keyframe. -->
             <keyframe instant="2">
                 <translate x="1" y="0" z="0" />
                 <rotate angle_x="0" angle_y="180" angle_z="0" />
-                <!--    a instrução rotação corresponde a:    -->
-                <!--    <rotate axis="x" angle="angle_x" />   -->
-                <!--    <rotate axis="y" angle="angle_y" />   -->
-                <!--    <rotate axis="z" angle="angle_z" />   -->
                 <scale x="2" y="2" z="2" />
             </keyframe>
         </animation>
-    </animations>
+    </animations>-->
 
     <primitives>
         <primitive id="myTorus">
@@ -77,7 +71,6 @@
             <transformation>
                  <rotate axis="x" angle="-90" />
             </transformation>
-            <!-- o elemento "animationref" e' opcional -->
             <animationref id="sampleAnim" />
             <materials>
                 <material id="blueMetal" />

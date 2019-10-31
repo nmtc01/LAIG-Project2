@@ -877,42 +877,42 @@ class MySceneGraph {
                 }
 
                 // Get instant of the current keyframe.
-                var keyframeInst = this.reader.getString(children[i], 'instant');
+                var keyframeInst = this.reader.getFloat(grandChildren[i], 'instant');
                 if (keyframeInst == null)
-                    return "no instant defined for animation";
+                    return "no instant defined for keyframe from animation " + animationID;
                 
                 grandgrandChildren = grandChildren[i].children;
-                if (grandgrandChildren.length < 3)
-                    return "insufficient transformations defined for keyframe on instant " + keyframeInst;
+                if (grandgrandChildren.length != 3)
+                    return "wrong number of transformations defined for keyframe on instant " + keyframeInst + " from animation " + animationID;
 
                 //Parse transformations
                 //create unit matrix 
                 var transfMatrix = mat4.create();
 
                 //TRANSLATE
-                if (grandgrandChildren[i].nodeName != "translate") {
-                    this.onXMLMinorError("wrong tag <" + grandgrandChildren[i].nodeName + ">");
+                if (grandgrandChildren[0].nodeName != "translate") {
+                    this.onXMLMinorError("wrong tag <" + grandgrandChildren[0].nodeName + ">, on keyframe of instant " + keyframeInst + " from animation " + animationID);
                     continue;
                 }
-                var coordinatesTranslate = this.parseCoordinates3D(grandChildren[j], "translate transformation for keyframe on instant " + keyframeInst);
+                var coordinatesTranslate = this.parseCoordinates3D(grandgrandChildren[0], "translate transformation for keyframe on instant " + keyframeInst);
                 if (!Array.isArray(coordinatesTranslate))
                     return coordinatesTranslate;
                 //update matrix
                 transfMatrix = mat4.translate(transfMatrix, transfMatrix, coordinatesTranslate);
 
                 //ROTATE
-                if (grandgrandChildren[i].nodeName != "rotate") {
-                    this.onXMLMinorError("wrong tag <" + grandgrandChildren[i].nodeName + ">");
+                if (grandgrandChildren[1].nodeName != "rotate") {
+                    this.onXMLMinorError("wrong tag <" + grandgrandChildren[1].nodeName + ">, on keyframe of instant " + keyframeInst + " from animation " + animationID);
                     continue;
                 }
                 //angle_x
-                var angle_x = this.reader.getString(grandChildren[j], 'angle_x');
+                var angle_x = this.reader.getString(grandgrandChildren[1], 'angle_x');
                 angle_x = angle_x * Math.PI / 180;
                 //angle_y
-                var angle_y = this.reader.getString(grandChildren[j], 'angle_y');
+                var angle_y = this.reader.getString(grandgrandChildren[1], 'angle_y');
                 angle_y = angle_y * Math.PI / 180;
                 //angle_z
-                var angle_z = this.reader.getString(grandChildren[j], 'angle_z');
+                var angle_z = this.reader.getString(grandgrandChildren[1], 'angle_z');
                 angle_z = angle_z * Math.PI / 180;
                 //update matrix
                 transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle_x, this.axisCoords['x']);
@@ -920,7 +920,11 @@ class MySceneGraph {
                 transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle_z, this.axisCoords['z']);
 
                 //SCALE
-                var coordinatesScale = this.parseCoordinates3D(grandChildren[j], "scale transformation for keyframe on instant " + keyframeInst);
+                if (grandgrandChildren[2].nodeName != "scale") {
+                    this.onXMLMinorError("wrong tag <" + grandgrandChildren[2].nodeName + ">, on keyframe of instant " + keyframeInst + " from animation " + animationID);
+                    continue;
+                }
+                var coordinatesScale = this.parseCoordinates3D(grandgrandChildren[2], "scale transformation for keyframe on instant " + keyframeInst);
                 if (!Array.isArray(coordinatesScale))
                     return coordinatesScale;
                 //update matrix
@@ -1249,7 +1253,7 @@ class MySceneGraph {
             // Animations -- Bloco pode ficar sem conteudo
             var animation = null;
             if (animationIndex == 1) {
-                var animref = this.reader.getString(grandChildren[0], 'id');
+                var animref = this.reader.getString(grandChildren[1], 'id');
                 //check if that reference exists 
                 if (this.animations[animref] == null)
                     return "Animation id has not been declared: " + animref;
