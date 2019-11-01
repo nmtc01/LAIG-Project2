@@ -1,7 +1,7 @@
 <lxs>
     <scene root="root" axis_length="5" />
 
-    <views default="defaultcamera" >
+    <views default="defaultCamera" >
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
             <from x="0" y="10" z="10" />
             <to x="0" y="-2" z="0" />
@@ -32,7 +32,6 @@
     </lights>
 
     <textures>
-        <texture id="iron" file="scenes/images/iron.png" />  
     </textures>
 
     <materials> 
@@ -103,7 +102,7 @@
         <primitive id="myTorus">
             <torus inner="0.5" outer="1" slices="50" loops="50" />
         </primitive>
-           <primitive id="magikarpBody">
+        <primitive id="magikarpBody">
             <sphere radius="1" slices="50" stacks="50" />
         </primitive>
         <primitive id="magikarpEye">
@@ -154,7 +153,39 @@
 
     </primitives >
  
-    <components>    
+    <components>  
+        <component id="whisker1">
+            <transformation>
+                <translate x="0.4" y="0" z="2.3"/>
+                <rotate axis="x" angle="45" />
+                <rotate axis="z" angle="-45" />
+                <rotate axis="y" angle="90" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="whisker" />
+            </children>
+        </component>
+
+        <component id="whisker2">
+            <transformation>
+                 <translate x="-0.4" y="0" z="2.3"/>
+                <rotate axis="x" angle="45" />
+                <rotate axis="z" angle="45" />
+                <rotate axis="y" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="whisker" />
+            </children>
+        </component>
+
         <component id="root">
             <transformation>
             </transformation>
@@ -163,11 +194,11 @@
             </materials>
             <texture id="none" />
             <children>
-                <componentref id="body" />
+                <componentref id="gyarados_body" />
             </children>
         </component>
 
-        <component id="body">
+        <component id="gyarados_body">
             <transformation>
             </transformation>
             <animationref id="sampleAnim" />
@@ -195,6 +226,8 @@
                 <componentref id="gyaradosFin2" />
                 <componentref id="gyaradosFin3" />
                 <componentref id="gyaradosFin4" />
+                <componentref id="gyaradosFin5" />
+                <componentref id="gyaradosFin6" />
                 <componentref id="head" />
             </children>
         </component>
@@ -263,6 +296,50 @@
                 <translate x="0" y="1" z="0"/>
                 <rotate axis="x" angle="-70"/>
                 <scale x="0.3" y="0.3" z="0.3"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="magikarpTopFin1" />
+                <primitiveref id="magikarpTopFin2" />
+                <primitiveref id="magikarpTopFin3" />
+                <primitiveref id="magikarpTopFin4" />
+                <primitiveref id="magikarpTopFin5" />
+                <primitiveref id="magikarpTopFin6" />
+            </children>
+        </component>
+
+        <component id="gyaradosFin5">
+            <transformation>
+                <translate x="0.35" y="3" z="4.5" />
+                <rotate axis="y" angle="90" />
+                <rotate axis="x" angle="80" />
+                <rotate axis="z" angle="-50" />
+                <scale x="0.3" y="0.3" z="0.3" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="magikarpTopFin1" />
+                <primitiveref id="magikarpTopFin2" />
+                <primitiveref id="magikarpTopFin3" />
+                <primitiveref id="magikarpTopFin4" />
+                <primitiveref id="magikarpTopFin5" />
+                <primitiveref id="magikarpTopFin6" />
+            </children>
+        </component>
+
+        <component id="gyaradosFin6">
+            <transformation>
+                <translate x="-0.35" y="3" z="4.5" />
+                <rotate axis="y" angle="-90" />
+                <rotate axis="x" angle="80" />
+                <rotate axis="z" angle="50" />
+                <scale x="0.3" y="0.3" z="0.3" />
             </transformation>
             <materials>
                 <material id="inherit" />
@@ -630,6 +707,11 @@
                 <componentref id="crown1" />
                 <componentref id="crown2" />
                 <componentref id="crown3" />
+                <componentref id="eye1" />
+                <componentref id="eye2" />
+                <componentref id="tongue" />
+                <componentref id="mouth" />
+                <componentref id="gyarados_Whiskers" />
                 <primitiveref id="mySphere" />
             </children>
         </component>
@@ -678,6 +760,135 @@
             <texture id="none" />
             <children>
                 <primitiveref id="gyaradosTailBone" />
+            </children>
+        </component>
+
+        <component id="tongue">
+            <transformation>
+                 <translate x="0" y="-0.7" z="0.5" />
+                 <rotate axis="x" angle="-30" />
+                 <scale x="0.3" y="0.4" z="0.3"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <primitiveref id="mySphere" />
+            </children>
+        </component>
+
+        <component id="mouth">
+            <transformation>
+                 <translate x="0" y="-0.6" z="0.7" />
+                 <rotate axis="x" angle="40" />
+                 <scale x="0.5" y="0.5" z="0.5"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <primitiveref id="myTorus" />
+            </children>
+        </component>
+
+        <component id="eye1">
+            <transformation>
+                <translate x="-0.6" y="-0.05" z="0.95" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <componentref id="eye_triangle1" />
+                <componentref id="eye_sphere1" />
+            </children>
+        </component>
+
+        <component id="eye_triangle1">
+            <transformation>
+                <rotate axis="y" angle="-90" />
+                <scale x="1" y="0.3" z="0.2"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <primitiveref id="myTriangle1" />
+            </children>
+        </component>
+
+        <component id="eye_sphere1">
+            <transformation>
+                <translate x="0.3" y="0.1" z="0" />
+                <scale x="0.1" y="0.09" z="0.1"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <primitiveref id="mySphere" />
+            </children>
+        </component>
+
+        <component id="eye2">
+            <transformation>
+                <translate x="0.6" y="-0.05" z="0.95" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <componentref id="eye_triangle2" />
+                <componentref id="eye_sphere2" />
+            </children>
+        </component>
+
+         <component id="eye_triangle2">
+            <transformation>
+                <rotate axis="y" angle="-90" />
+                <scale x="1" y="0.3" z="0.2"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <primitiveref id="myTriangle2" />
+            </children>
+        </component>
+
+        <component id="eye_sphere2">
+            <transformation>
+                <translate x="-0.31" y="0.1" z="0" />
+                <scale x="0.1" y="0.09" z="0.1"/>
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <primitiveref id="mySphere" />
+            </children>
+        </component>
+
+        <component id="gyarados_Whiskers">
+            <transformation>
+                <translate x="0" y="-0.7" z="-1" />
+                <scale x="0.5" y="0.5" z="0.5" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <componentref id="whisker1" />
+                <componentref id="whisker2" />
             </children>
         </component>
     </components>
