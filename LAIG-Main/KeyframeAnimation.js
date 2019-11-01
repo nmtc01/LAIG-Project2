@@ -53,8 +53,8 @@ class KeyFrameAnimaton extends Animation {
             //console.log('nao da mais');
             return;
         }
-
-        this.sent += 0.1; //chamado de 100 em 100 ms, comfimar mais tarde 
+        
+        this.sent += 0.01; //chamado de 100 em 100 ms, comfimar mais tarde 
         //check if should change to anotern keyframe    
         if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
             this.sent -= this.t[this.segment]; // reset sent 
@@ -72,9 +72,9 @@ class KeyFrameAnimaton extends Animation {
 
         //translate 
         this.ma = mat4.multiply(this.ma,this.keyframes[this.segment][0],this.progress_percentage);
-        console.log(this.ma);
+        //console.log(this.ma);
         this.parent.m = mat4.multiply( this.parent.m,this.ma,this.mn);
-
+        //console.log(this.parent.last_t);
     }
 
 }
