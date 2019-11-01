@@ -18,7 +18,7 @@ class Animation{
         this.last_t=0;
         this.second=0; 
         
-        this.m;
+        this.m=mat4.create();
     }
       /**
      * @method update
