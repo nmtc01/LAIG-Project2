@@ -23,7 +23,7 @@ class KeyFrameAnimaton extends Animation {
         //translate -> rotate -> scale 
         this.keyframes = keyframes;
 
-        this.instant = this.keyframes[0][1]; //first keyframe passed with instant sotred in 3rd index
+        this.instant = this.keyframes[0][1]; //first keyframe passed with instant sotred in 1st index
 
         this.keyframe_num = 0; //keyframe using numeration
 

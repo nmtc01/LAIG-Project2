@@ -872,16 +872,16 @@ class MySceneGraph {
             // Any number of keyframes.
             for (let j = 0; j < grandChildren.length; j++) {
                 if (grandChildren[i].nodeName != "keyframe") {
-                    this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                    this.onXMLMinorError("unknown tag <" + children[j].nodeName + ">");
                     continue;
                 }
 
                 // Get instant of the current keyframe.
-                var keyframeInst = this.reader.getFloat(grandChildren[i], 'instant');
+                var keyframeInst = this.reader.getFloat(grandChildren[j], 'instant');
                 if (keyframeInst == null)
                     return "no instant defined for keyframe from animation " + animationID;
                 
-                grandgrandChildren = grandChildren[i].children;
+                grandgrandChildren = grandChildren[j].children;
                 if (grandgrandChildren.length != 3)
                     return "wrong number of transformations defined for keyframe on instant " + keyframeInst + " from animation " + animationID;
 
@@ -934,7 +934,7 @@ class MySceneGraph {
                 this.keyframePair = [2];
                 this.keyframePair[0] = transfMatrix;
                 this.keyframePair[1] = keyframeInst;
-                this.keyframes[i] = this.keyframePair;
+                this.keyframes[j] = this.keyframePair;
             }
 
             //store animation
