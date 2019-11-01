@@ -89,11 +89,35 @@
     </textures>
 
     <materials>
+        <material id="gyaradosMouth" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.5" g="0.5" b="0.4" a="1.0" />
+            <diffuse r="0.5" g="0.5" b="0.4" a="1.0" />
+            <specular r="0.5" g="0.5" b="0.4" a="1.0" />
+        </material>
+        <material id="gyaradosEyeBalls" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.5" g="0.1" b="0.0" a="1.0" />
+            <diffuse r="0.5" g="0.1" b="0.0" a="1.0" />
+            <specular r="0.5" g="0.1" b="0.0" a="1.0" />
+        </material>
+        <material id="tongue" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.5" g="0.1" b="0.3" a="1.0" />
+            <diffuse r="0.5" g="0.1" b="0.3" a="1.0" />
+            <specular r="0.5" g="0.1" b="0.3" a="1.0" />
+        </material>
         <material id="blueGyarados" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.0" g="0.25" b="1" a="1.0" />
             <diffuse r="0.0" g="0.25" b="1" a="1.0" />
             <specular r="0.0" g="0.25" b="1" a="1.0" />
+        </material>
+        <material id="gyaradosCrown" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.0" g="0.1" b="1" a="1.0" />
+            <diffuse r="0.0" g="0.1" b="1" a="1.0" />
+            <specular r="0.0" g="0.1" b="1" a="1.0" />
         </material>
         <material id="blueMetal" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
@@ -1460,13 +1484,25 @@
                 <componentref id="body_sphere13" />
                 <componentref id="top" />
                 <componentref id="gyarados_tail" />
+                <componentref id="gyaradosFins" />
+                <componentref id="head" />
+            </children>
+        </component>
+
+        <component id="gyaradosFins">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="white" />
+            </materials>
+            <texture id="none"/>
+            <children>
                 <componentref id="gyaradosFin1" />
                 <componentref id="gyaradosFin2" />
                 <componentref id="gyaradosFin3" />
                 <componentref id="gyaradosFin4" />
                 <componentref id="gyaradosFin5" />
                 <componentref id="gyaradosFin6" />
-                <componentref id="head" />
             </children>
         </component>
 
@@ -1605,6 +1641,18 @@
                 <componentref id="tail_bone1" />
                 <componentref id="tail_bone2" />
                 <componentref id="tail_bone3" />
+                <componentref id="gyarados_tail_fins" />
+            </children>
+        </component>
+
+        <component id="gyarados_tail_fins">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="white" />
+            </materials>
+            <texture id="none" />
+            <children>
                 <componentref id="tail_fin1" />
                 <componentref id="tail_fin2" />
             </children>
@@ -1942,15 +1990,27 @@
             </materials>
             <texture id="none" />
             <children>
-                <componentref id="crown1" />
-                <componentref id="crown2" />
-                <componentref id="crown3" />
+                <componentref id="crowns" />
                 <componentref id="gyarados_eye1" />
                 <componentref id="gyarados_eye2" />
                 <componentref id="tongue" />
                 <componentref id="mouth" />
                 <componentref id="gyarados_Whiskers" />
                 <primitiveref id="mySphere" />
+            </children>
+        </component>
+
+        <component id="crowns">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="gyaradosCrown" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <componentref id="crown1" />
+                <componentref id="crown2" />
+                <componentref id="crown3" />
             </children>
         </component>
 
@@ -2008,7 +2068,7 @@
                  <scale x="0.3" y="0.4" z="0.3"/>
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="tongue" />
             </materials>
             <texture id="none" />
             <children>
@@ -2023,7 +2083,7 @@
                  <scale x="0.5" y="0.5" z="0.5"/>
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="gyaradosMouth" />
             </materials>
             <texture id="none" />
             <children>
@@ -2036,7 +2096,7 @@
                 <translate x="-0.6" y="-0.05" z="0.95" />
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="white" />
             </materials>
             <texture id="none" />
             <children>
@@ -2065,7 +2125,7 @@
                 <scale x="0.1" y="0.09" z="0.1"/>
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="gyaradosEyeBalls" />
             </materials>
             <texture id="none" />
             <children>
@@ -2078,7 +2138,7 @@
                 <translate x="0.6" y="-0.05" z="0.95" />
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="white" />
             </materials>
             <texture id="none" />
             <children>
@@ -2107,7 +2167,7 @@
                 <scale x="0.1" y="0.09" z="0.1"/>
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="gyaradosEyeBalls" />
             </materials>
             <texture id="none" />
             <children>
@@ -2121,7 +2181,7 @@
                 <scale x="0.5" y="0.5" z="0.5" />
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="white" />
             </materials>
             <texture id="none"/>
             <children>
@@ -2154,7 +2214,7 @@
                 <rotate axis="y" angle="-90" />
             </transformation>
             <materials>
-                <material id="white" />
+                <material id="inherit" />
             </materials>
             <texture id="none"/>
             <children>
