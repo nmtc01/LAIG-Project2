@@ -7,7 +7,6 @@ class KeyFrameAnimaton extends Animation {
     /**
      * @constructor 
      * @param {int} id
-     * @param {mat4} mn - current tranformation object matrix
      * @param {array} keyframe - array of arrays storing animaton keyframe + start instant 
      */
     constructor(id,keyframes) {
@@ -41,13 +40,13 @@ class KeyFrameAnimaton extends Animation {
     process_animation(){
 
         //check if should change to anotern keyframe    
-        if(super.second == this.keyframes[keyframe_num][3]){
-            keyframe_num++; 
+        if(super.second == this.keyframes[this.keyframe_num][1]){
+            this.keyframe_num++; 
             this.sent=0; //reset sent 
         }
 
         //aplicar a transformação sobre a matriz de transformações da cena quando adequado 
-        if (this.sent > this.keyframes[keyframe_num][3]) {
+        if (this.sent > this.keyframes[this.keyframe_num][3]) {
            // this.sent -= super.second;
            // this.segundo += this.segundo;
            this.sent++; 
@@ -56,8 +55,8 @@ class KeyFrameAnimaton extends Animation {
         
         //calculate matriz SRT 
 
-        //tranlate 
-        this.ma = progress_percentage*this.keyframe[keyframe_num][0];
+        //translate 
+        this.ma = this.progress_percentage*this.keyframes[this.keyframe_num][0];
 
         super.m = this.mm * this.ma;
     }

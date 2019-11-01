@@ -931,7 +931,7 @@ class MySceneGraph {
                 transfMatrix = mat4.scale(transfMatrix, transfMatrix, coordinatesScale);
 
                 //store keyframe
-                this.keyframePair[2];
+                this.keyframePair = [2];
                 this.keyframePair[0] = transfMatrix;
                 this.keyframePair[1] = keyframeInst;
                 this.keyframes[i] = this.keyframePair;
@@ -1508,9 +1508,9 @@ class MySceneGraph {
 
         //TODO 
         //Animations 
-        //this.components[child].animation.set_mn(this.components[child].transformation);
-        //this.components[child].animation.process_animation();
-        //this.scene.animation.apply();
+        this.components[child].animation.set_mn(this.components[child].transformation);
+        this.components[child].animation.process_animation();
+        this.scene.animation.apply();
         
 
         //Materials
