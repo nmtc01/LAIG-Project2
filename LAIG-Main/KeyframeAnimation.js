@@ -58,7 +58,7 @@ class KeyFrameAnimaton extends Animation {
         //check if should change to anotern keyframe    
         if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
             this.sent -= this.t[this.segment]; // reset sent 
-            if (this.segment++ > this.keyframes.length - 1) {
+            if (this.segment + 1 > this.keyframes.length - 1) {
                 //console.log('nao da mais');
                 return;
             }
