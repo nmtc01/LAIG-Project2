@@ -40,7 +40,7 @@ class KeyFrameAnimaton extends Animation {
     process_animation(){
 
         //check if should change to anotern keyframe    
-        if(super.second == this.keyframes[this.keyframe_num][1]){
+        if(this.second == this.keyframes[this.keyframe_num][1]){
             this.keyframe_num++; 
             this.sent=0; //reset sent 
         }
