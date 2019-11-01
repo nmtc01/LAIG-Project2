@@ -1539,10 +1539,6 @@ class MySceneGraph {
 
         //Apply
         parent_material.apply();
-        //Process child components
-        for (let i = 0; i < this.components[child].children.componentrefIDs.length; i++) {
-            this.processChild(this.components[child].children.componentrefIDs[i], parent_material, parent_texture, parent_length_s, parent_length_t);
-        }
 
         //Process end node/primitives
         for (let i = 0; i < this.components[child].children.primitiverefIDs.length; i++) {
@@ -1559,6 +1555,12 @@ class MySceneGraph {
             this.components[child].children.primitiverefIDs[i].display();
             this.scene.popMatrix();
         }
+        
+        //Process child components
+        for (let i = 0; i < this.components[child].children.componentrefIDs.length; i++) {
+            this.processChild(this.components[child].children.componentrefIDs[i], parent_material, parent_texture, parent_length_s, parent_length_t);
+        }
+
         this.scene.popMatrix();
 
         //set as unvisited so that displayScene can be caled multiple times
