@@ -12,6 +12,9 @@ class Animation{
     constructor(scene){
         //times 
         this.scene = scene; 
+
+        //times 
+        this.delta_t=0;
         this.last_t=0;
         this.second=0; 
         
@@ -27,15 +30,16 @@ class Animation{
        this.last_t = t;
        if( t%100 == 0 ){ //todo see what is happing on senconds ( should be mod 10 ) 1000= 1second, refrsh 100, 10TICKS = 2 s
         this.second++; 
-       }
-       //...  
+       } 
     }
     /**
      * @method apply
      * aplicar a transformação sobre a matriz de transformações da cena quando adequado 
      */
     apply(){
+        this.scene.pushMatrix();
         this.scene.multMatrix(this.m);
+        this.scene.popMatrix();
     }
 
 }

@@ -937,7 +937,7 @@ class MySceneGraph {
             //store animation
             this.animations[animationID] = this.keyframes;
         }
-
+        console.log(this.animations);
         this.log("Parsed animations");
 
         return null;
@@ -1501,6 +1501,13 @@ class MySceneGraph {
 
         this.scene.pushMatrix();
         this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
+
+        //TODO 
+        //Animations 
+        //this.components[child].animation.set_mn(this.components[child].transformation);
+        //this.components[child].animation.process_animation();
+        //this.scene.animation.apply();
+        
 
         //Materials
         if (this.components[child].component_materials == 'inherit') { //if inherit does nothing, keeps the current material, from the parent 
