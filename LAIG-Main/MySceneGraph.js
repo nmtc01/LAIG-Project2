@@ -941,7 +941,6 @@ class MySceneGraph {
             let animation = new KeyFrameAnimaton(animationID, this.keyframes);
             this.animations[animationID] = animation;
         }
-        console.log(this.animations);
         this.log("Parsed animations");
 
         return null;
@@ -1508,7 +1507,7 @@ class MySceneGraph {
 
         //TODO 
         //Animations 
-        this.components[child].animation.set_mn(this.components[child].transformation);
+        //this.components[child].animation.set_mn(this.components[child].transformation);
         this.components[child].animation.process_animation();
         this.scene.animation.apply();
         

@@ -9,11 +9,14 @@ class KeyFrameAnimaton extends Animation {
      * @param {int} id
      * @param {array} keyframe - array of arrays storing animaton keyframe + start instant 
      */
-    constructor(id,keyframes) {
+    constructor(id, keyframes) {
         super();
 
+        //parent values
+        this.parent = this;
+
         this.sent = 0;
-        this.segment=0; 
+        this.segment = 0;
         this.progress_percentage = 0;
         this.second_instant = 0;
 
@@ -25,7 +28,14 @@ class KeyFrameAnimaton extends Animation {
 
         this.instant = this.keyframes[0][1]; //first keyframe passed with instant sotred in 1st index
 
-        this.keyframe_num = 0; //keyframe using numeration
+        this.segment = 0; //keyframe using numeration
+
+        //make segment time array 
+        this.t = [this.keyframes[0][1]];
+        for (let i = 1; i < this.keyframes.length; i++) {
+            this.t.push(this.keyframes[i][1] - this.keyframes[i-1][1]);
+        }
+        console.log(this.t);
 
         //NOTE first keyfram is set with sample values 
     }
@@ -37,28 +47,34 @@ class KeyFrameAnimaton extends Animation {
     * @param {flat} progress_percentage - progress percentage
     * @param {int} keyframe_num keyframe number operating
     */
-    process_animation(){
+    process_animation() {
+        //stop excecution 
+        if (this.segment > this.keyframes.length - 1) {
+            //console.log('nao da mais');
+            return;
+        }
 
+        this.sent += 0.1; //chamado de 100 em 100 ms, comfimar mais tarde 
         //check if should change to anotern keyframe    
-        if(this.second == this.keyframes[this.keyframe_num][1]){
-            this.keyframe_num++; 
-            this.sent=0; //reset sent 
+        if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
+            this.sent -= this.t[this.segment]; // reset sent 
+            if (this.segment++ > this.keyframes.length - 1) {
+                //console.log('nao da mais');
+                return;
+            }
         }
-
-        //aplicar a transformação sobre a matriz de transformações da cena quando adequado 
-        if (this.sent > this.keyframes[this.keyframe_num][3]) {
-           // this.sent -= super.second;
-           // this.segundo += this.segundo;
-           this.sent++; 
-        }
-        this.progress_percentage = this.sent / this.second_instant; //percentage 
-        
+        //console.log(this.sent);
+        //console.log(this.sent);
+        this.progress_percentage = this.sent / this.t[this.segment]; //percentage 
+        //console.log(this.progress_percentage);
+        //console.log(this.progress_percentage);
         //calculate matriz SRT 
 
         //translate 
-        this.ma = this.progress_percentage*this.keyframes[this.keyframe_num][0];
+        this.ma = mat4.multiply(this.ma,this.keyframes[this.segment][0],this.progress_percentage);
+        console.log(this.ma);
+        this.parent.m = mat4.multiply( this.parent.m,this.ma,this.mn);
 
-        super.m = this.mm * this.ma;
     }
 
 }
