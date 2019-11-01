@@ -30,7 +30,7 @@ class KeyFrameAnimaton extends Animation {
         //NOTE first keyfram is set with sample values 
     }
     set_mn(mn){
-        this.mn *= mn; 
+        this.mn = mn; 
     }
     /**
     * create ma
