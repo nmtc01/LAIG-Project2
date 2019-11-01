@@ -40,7 +40,7 @@ class Animation{
         this.scene.pushMatrix();
         this.scene.multMatrix(this.m);
         this.scene.popMatrix();
-        console.log(this.second);
+        //console.log(this.second);
     }
 
 }

@@ -1509,7 +1509,10 @@ class MySceneGraph {
         //Animations 
         //this.components[child].animation.set_mn(this.components[child].transformation);
         this.components[child].animation.process_animation();
-        this.scene.animation.apply();
+
+        //this.scene.animation.apply();
+        //this one I think:
+        //this.components[child].animation.apply();
         
 
         //Materials

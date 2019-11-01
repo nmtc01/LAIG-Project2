@@ -71,9 +71,9 @@ class KeyFrameAnimaton extends Animation {
         //calculate matriz SRT 
 
         //translate 
-        this.ma = mat4.multiply(this.ma,this.keyframes[this.segment][0],this.progress_percentage);
+        this.ma = mat4.multiply(this.ma,this.keyframes[this.segment][0],this.ma);//this.progress_percentage);
         //console.log(this.ma);
-        this.parent.m = mat4.multiply( this.parent.m,this.ma,this.mn);
+        this.m = mat4.multiply(this.mn,this.ma,this.m);
         //console.log(this.parent.last_t);
     }
 
