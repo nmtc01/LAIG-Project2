@@ -1339,7 +1339,7 @@
             </children>
         </component>
 
-         <component id="magikarpTail">
+        <component id="magikarpTail">
             <transformation>
                 <translate x="0" y="0" z="-2"/>
                 <rotate axis="y" angle="90" />
@@ -1368,7 +1368,8 @@
                 <primitiveref id="magikarpFin2" />
             </children>
         </component>
-          <component id="magikarpFin2">
+
+        <component id="magikarpFin2">
             <transformation>
                 <translate x="-1.21" y="-0.25" z="1.4"/>
                 <rotate axis="y" angle="110" />
@@ -1937,7 +1938,7 @@
                  <scale x="0.5" y="0.8" z="0.5"/>
             </transformation>
             <materials>
-                <material id="inherit" />
+                <material id="blueGyarados" />
             </materials>
             <texture id="none" />
             <children>
@@ -2124,8 +2125,40 @@
             </materials>
             <texture id="none"/>
             <children>
-                <componentref id="whisker1" />
-                <componentref id="whisker2" />
+                <componentref id="gyarados_whisker1" />
+                <componentref id="gyarados_whisker2" />
+            </children>
+        </component>
+
+        <component id="gyarados_whisker1">
+            <transformation>
+                <translate x="0.4" y="0" z="2.3"/>
+                <rotate axis="x" angle="45" />
+                <rotate axis="z" angle="-45" />
+                <rotate axis="y" angle="90" />
+            </transformation>
+            <materials>
+                <material id="inherit" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="whisker" />
+            </children>
+        </component>
+
+        <component id="gyarados_whisker2">
+            <transformation>
+                <translate x="-0.4" y="0" z="2.3"/>
+                <rotate axis="x" angle="45" />
+                <rotate axis="z" angle="45" />
+                <rotate axis="y" angle="-90" />
+            </transformation>
+            <materials>
+                <material id="white" />
+            </materials>
+            <texture id="none"/>
+            <children>
+                <primitiveref id="whisker" />
             </children>
         </component>
 
