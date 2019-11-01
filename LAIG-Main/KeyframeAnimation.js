@@ -8,7 +8,7 @@ class KeyFrameAnimaton extends Animation {
      * @constructor 
      * @param {int} id
      * @param {mat4} mn - current tranformation object matrix
-     * @param {array} keyframe - array of arrays of arrays storing animaton keyframe + start instant 
+     * @param {array} keyframe - array of arrays storing animaton keyframe + start instant 
      */
     constructor(id, mn, keyframes) {
         super();
@@ -23,7 +23,7 @@ class KeyFrameAnimaton extends Animation {
         //translate -> rotate -> scale 
         this.keyframes = keyframes;
 
-        this.instant = this.keyframes[0][3]; //first keyframe passed with instant sotred in 3rd index
+        this.instant = this.keyframes[0][3]; //first keyframe passed with instant stored in 3rd index
 
         this.keyframe_num = 0; //keyframe using numeration
 

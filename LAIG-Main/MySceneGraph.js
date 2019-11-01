@@ -931,11 +931,15 @@ class MySceneGraph {
                 transfMatrix = mat4.scale(transfMatrix, transfMatrix, coordinatesScale);
 
                 //store keyframe
-                this.keyframes[keyframeInst] = transfMatrix;
+                this.keyframePair[2];
+                this.keyframePair[0] = transfMatrix;
+                this.keyframePair[1] = keyframeInst;
+                this.keyframes[i] = this.keyframePair;
             }
 
             //store animation
-            this.animations[animationID] = this.keyframes;
+            let animation = new KeyFrameAnimaton(animationID, this.keyframes);
+            this.animations[animationID] = animation;
         }
 
         this.log("Parsed animations");
