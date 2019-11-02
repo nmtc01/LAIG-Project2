@@ -38,7 +38,8 @@ class KeyFrameAnimaton extends Animation {
     }
 
     set_mn(mn){
-       this.mn = mat4.multiply(this.mn,this.mn, mn); 
+       //this.mn = mat4.multiply(this.mn,this.mn, mn); 
+       this.mn = mn;
     }
 
     /**
@@ -53,8 +54,9 @@ class KeyFrameAnimaton extends Animation {
             console.log('nao da mais');
             return this.m;
         }
-        //console.log(this.segment);
+
         this.sent += 0.01; //chamado de 100 em 100 ms, comfimar mais tarde 
+
         //check if should change to another keyframe    
         if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
             this.sent -= this.t[this.segment]; // reset sent 
@@ -83,9 +85,9 @@ class KeyFrameAnimaton extends Animation {
             this.keyframes[this.segment][1][2]*this.progress_percentage
         ];
         let rotation_matrix = mat4.create();
-        rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[0],  [1, 0, 0]);
+        /*rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[0],  [1, 0, 0]);
         rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[1],  [0, 1, 0]);
-        rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[2],  [0, 0, 1]);
+        rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[2],  [0, 0, 1]);*/
 
         //TODO SCALE 
         let S = [
@@ -94,7 +96,7 @@ class KeyFrameAnimaton extends Animation {
             this.keyframes[this.segment][2][2]*this.progress_percentage
         ];
         let scale_matrix = mat4.create();
-        scale_matrix = mat4.scale(scale_matrix, scale_matrix, S);
+        //scale_matrix = mat4.scale(scale_matrix, scale_matrix, S);
     
 
         //multiply all matrixes

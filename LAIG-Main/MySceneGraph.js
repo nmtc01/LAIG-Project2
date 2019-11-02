@@ -886,11 +886,6 @@ class MySceneGraph {
                     return "wrong number of transformations defined for keyframe on instant " + keyframeInst + " from animation " + animationID;
 
                 //Parse transformations
-                //create unit matrix 
-                
-                var translateMatrix = mat4.create();
-                var rotateMatrix = mat4.create();
-                var scaleMatrix = mat4.create();
                 
                 //TRANSLATE
                 if (grandgrandChildren[0].nodeName != "translate") {
@@ -900,8 +895,6 @@ class MySceneGraph {
                 var coordinatesTranslate = this.parseCoordinates3D(grandgrandChildren[0], "translate transformation for keyframe on instant " + keyframeInst);
                 if (!Array.isArray(coordinatesTranslate))
                     return coordinatesTranslate;
-                //update matrix
-                translateMatrix = mat4.translate(translateMatrix, translateMatrix, coordinatesTranslate);
 
                 //ROTATE
                 if (grandgrandChildren[1].nodeName != "rotate") {
@@ -917,10 +910,7 @@ class MySceneGraph {
                 //angle_z
                 var angle_z = this.reader.getString(grandgrandChildren[1], 'angle_z');
                 angle_z = angle_z * Math.PI / 180;
-                //update matrix
-                rotateMatrix = mat4.rotate(rotateMatrix, rotateMatrix, angle_x, this.axisCoords['x']);
-                rotateMatrix = mat4.rotate(rotateMatrix, rotateMatrix, angle_y, this.axisCoords['y']);
-                rotateMatrix = mat4.rotate(rotateMatrix, rotateMatrix, angle_z, this.axisCoords['z']);
+                var coordinatesRotate = [angle_x,angle_y,angle_z];
 
                 //SCALE
                 if (grandgrandChildren[2].nodeName != "scale") {
@@ -930,20 +920,12 @@ class MySceneGraph {
                 var coordinatesScale = this.parseCoordinates3D(grandgrandChildren[2], "scale transformation for keyframe on instant " + keyframeInst);
                 if (!Array.isArray(coordinatesScale))
                     return coordinatesScale;
-                //update matrix
-                scaleMatrix = mat4.scale(scaleMatrix, scaleMatrix, coordinatesScale);
 
-                //store keyframe
+                //Store keyframe
                 this.keyframe = [4];
-                /*
-                this.keyframe[0] = translateMatrix;
-                this.keyframe[1] = rotateMatrix;
-                this.keyframe[2] = scaleMatrix;
-                */
                 this.keyframe[0] = coordinatesTranslate;
-                this.keyframe[1] = [angle_x,angle_y,angle_z];
+                this.keyframe[1] = coordinatesRotate;
                 this.keyframe[2] = coordinatesScale;
-                
                 this.keyframe[3] = keyframeInst;
                 this.keyframes[j] = this.keyframe;
             }
@@ -1521,7 +1503,7 @@ class MySceneGraph {
         //Animations 
         this.components[child].animation.set_mn(this.components[child].transformation);
         //this.components[child].animation.process_animation(this.components[child].transformation);
-        this.scene.multMatrix( this.components[child].animation.process_animation());
+        this.scene.multMatrix(this.components[child].animation.process_animation());
         //this.scene.animation.apply();
         //this one I think:
         //this.components[child].animation.apply();
