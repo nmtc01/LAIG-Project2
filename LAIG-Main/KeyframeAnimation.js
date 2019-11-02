@@ -77,7 +77,7 @@ class KeyFrameAnimaton extends Animation {
         let translate_matrix = mat4.create();
         translate_matrix = mat4.translate(translate_matrix, translate_matrix, T);
        
-        //TODO ROTATE 
+        //ROTATE 
         let R = [
             this.keyframes[this.segment][1][0]*this.progress_percentage,
             this.keyframes[this.segment][1][1]*this.progress_percentage,
@@ -88,15 +88,44 @@ class KeyFrameAnimaton extends Animation {
         rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[1],  [0, 1, 0]);
         rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[2],  [0, 0, 1]);
 
-        //TODO SCALE 
-        let S = [
-            this.keyframes[this.segment][2][0]*this.progress_percentage,
-            this.keyframes[this.segment][2][1]*this.progress_percentage,
-            this.keyframes[this.segment][2][2]*this.progress_percentage
-        ];
+        //SCALE 
+        let S = [];
+
+        if (this.segment < this.keyframes.length - 2) {
+            let initialKeyframeCoords = [3];
+            initialKeyframeCoords[0] = this.keyframes[this.segment][2][0];
+            initialKeyframeCoords[1] = this.keyframes[this.segment][2][1];
+            initialKeyframeCoords[2] = this.keyframes[this.segment][2][2];
+            let finalKeyframeCoords = [3];
+            finalKeyframeCoords[0] = this.keyframes[this.segment+1][2][0];
+            finalKeyframeCoords[1] = this.keyframes[this.segment+1][2][1];
+            finalKeyframeCoords[2] = this.keyframes[this.segment+1][2][2];
+
+            let rx = Math.pow(finalKeyframeCoords[0]/initialKeyframeCoords[0], 1/this.t[this.segment]);
+            let ry = Math.pow(finalKeyframeCoords[1]/initialKeyframeCoords[1], 1/this.t[this.segment]);
+            let rz = Math.pow(finalKeyframeCoords[2]/initialKeyframeCoords[2], 1/this.t[this.segment]);
+
+            S = [
+                this.keyframes[this.segment][2][0]*rx,
+                this.keyframes[this.segment][2][1]*ry,
+                this.keyframes[this.segment][2][2]*rz
+            ];
+        }
+        else {
+            let keyframeCoords = [3];
+            keyframeCoords[0] = this.keyframes[this.segment][2][0];
+            keyframeCoords[1] = this.keyframes[this.segment][2][1];
+            keyframeCoords[2] = this.keyframes[this.segment][2][2];
+
+            S = [
+                this.keyframes[this.segment][2][0]*keyframeCoords[0],
+                this.keyframes[this.segment][2][1]*keyframeCoords[1],
+                this.keyframes[this.segment][2][2]*keyframeCoords[2]
+            ];
+        }
+
         let scale_matrix = mat4.create();
         scale_matrix = mat4.scale(scale_matrix, scale_matrix, S);
-    
 
         //multiply all matrixes
         let aux_mat = mat4.create(); 
