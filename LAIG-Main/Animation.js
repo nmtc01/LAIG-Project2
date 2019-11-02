@@ -2,8 +2,6 @@
  * Animation
  * @constructor
  * @param scene - Reference to MyScene object
- * @param x - Scale of rectangle in X
- * @param y - Scale of rectangle in Y
  */
 class Animation{
     /**
@@ -38,9 +36,7 @@ class Animation{
     apply(){
         this.scene.pushMatrix();
         this.scene.multMatrix(this.m);
-        //console.log(this.m);
         this.scene.popMatrix();
-        //console.log(this.second);
     }
 
 }

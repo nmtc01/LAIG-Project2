@@ -887,7 +887,9 @@ class MySceneGraph {
 
                 //Parse transformations
                 //create unit matrix 
-                var transfMatrix = mat4.create();
+                var translateMatrix = mat4.create();
+                var rotateMatrix = mat4.create();
+                var scaleMatrix = mat4.create();
 
                 //TRANSLATE
                 if (grandgrandChildren[0].nodeName != "translate") {
@@ -898,7 +900,7 @@ class MySceneGraph {
                 if (!Array.isArray(coordinatesTranslate))
                     return coordinatesTranslate;
                 //update matrix
-                transfMatrix = mat4.translate(transfMatrix, transfMatrix, coordinatesTranslate);
+                translateMatrix = mat4.translate(translateMatrix, translateMatrix, coordinatesTranslate);
 
                 //ROTATE
                 if (grandgrandChildren[1].nodeName != "rotate") {
@@ -915,9 +917,9 @@ class MySceneGraph {
                 var angle_z = this.reader.getString(grandgrandChildren[1], 'angle_z');
                 angle_z = angle_z * Math.PI / 180;
                 //update matrix
-                transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle_x, this.axisCoords['x']);
-                transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle_y, this.axisCoords['y']);
-                transfMatrix = mat4.rotate(transfMatrix, transfMatrix, angle_z, this.axisCoords['z']);
+                rotateMatrix = mat4.rotate(rotateMatrix, rotateMatrix, angle_x, this.axisCoords['x']);
+                rotateMatrix = mat4.rotate(rotateMatrix, rotateMatrix, angle_y, this.axisCoords['y']);
+                rotateMatrix = mat4.rotate(rotateMatrix, rotateMatrix, angle_z, this.axisCoords['z']);
 
                 //SCALE
                 if (grandgrandChildren[2].nodeName != "scale") {
@@ -928,13 +930,15 @@ class MySceneGraph {
                 if (!Array.isArray(coordinatesScale))
                     return coordinatesScale;
                 //update matrix
-                transfMatrix = mat4.scale(transfMatrix, transfMatrix, coordinatesScale);
+                scaleMatrix = mat4.scale(scaleMatrix, scaleMatrix, coordinatesScale);
 
                 //store keyframe
-                this.keyframePair = [2];
-                this.keyframePair[0] = transfMatrix;
-                this.keyframePair[1] = keyframeInst;
-                this.keyframes[j] = this.keyframePair;
+                this.keyframe = [4];
+                this.keyframe[0] = translateMatrix;
+                this.keyframe[1] = rotateMatrix;
+                this.keyframe[2] = scaleMatrix;
+                this.keyframe[3] = keyframeInst;
+                this.keyframes[j] = this.keyframe;
             }
 
             //store animation
@@ -1502,16 +1506,15 @@ class MySceneGraph {
         //set component as visited to avoid processing repetitions 
         this.components[child].visited = true; //set as visited
 
+        //Transformations
         this.scene.pushMatrix();
-        //this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
-
-        //this.scene.popMatrix();
+        this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
+        
         //TODO 
         //Animations 
-        //this.scene.pushMatrix();
         this.components[child].animation.set_mn(this.components[child].transformation);
-        //this.components[child].animation.process_animation();
-        this.scene.multMatrix(this.components[child].animation.process_animation());
+        this.components[child].animation.process_animation();
+        //this.scene.multMatrix(this.components[child].animation.process_animation());
         //this.scene.animation.apply();
         //this one I think:
         //this.components[child].animation.apply();

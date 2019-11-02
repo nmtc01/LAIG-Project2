@@ -23,26 +23,27 @@ class KeyFrameAnimaton extends Animation {
         //trans matrixes 
         this.ma = mat4.create();
         this.mn = mat4.create();
-        this.m=mat4.create();
+        this.m = mat4.create();
         //translate -> rotate -> scale 
         this.keyframes = keyframes;
 
-        this.instant = this.keyframes[0][1]; //first keyframe passed with instant sotred in 1st index
+        this.instant = this.keyframes[0][3]; //first keyframe passed with instant stored in 3rd index
 
         this.segment = 0; //keyframe using numeration
 
         //make segment time array 
-        this.t = [this.keyframes[0][1]];
+        this.t = [this.instant];
         for (let i = 1; i < this.keyframes.length; i++) {
             this.t.push(this.keyframes[i][1] - this.keyframes[i-1][1]);
         }
-        console.log(this.t);
 
         //NOTE first keyfram is set with sample values 
     }
+
     set_mn(mn){
-        this.mn = mn; 
+        this.mn = mat4.multiply(this.mn,this.mn, mn); 
     }
+
     /**
     * create ma
     * @param {flat} progress_percentage - progress percentage
@@ -64,26 +65,21 @@ class KeyFrameAnimaton extends Animation {
                 return;
             }
         }
-        //console.log(this.sent);
-        //console.log(this.sent);
-        this.progress_percentage = this.sent / this.t[this.segment]; //percentage 
-        //console.log(this.progress_percentage);
-        //console.log(this.progress_percentage);
-        //calculate matriz SRT 
+        
+        //this.progress_percentage = this.sent / this.t[this.segment]; //percentage
 
+        //calculate matriz SRT 
         //translate 
         //this.ma = mat4.multiply(this.ma,this.keyframes[this.segment][0],1);//this.progress_percentage);
         //hardcoded 
-        for( let i =0; i< 16; i++){
+        /*for( let i =0; i< 16; i++){
             if(this.mn[i] != 0 && this.mn[i] != 1 && this.mn[i] != -1)
                this.ma[i] = this.keyframes[this.segment][0][i] * this.progress_percentage; 
             else this.ma[i] = this.mn[i]; 
         }
-        console.log(this.ma);
-       //console.log(this.ma);
-        this.m = mat4.multiply(this.m,this.ma,this.mn);
-       //console.log(this.ma);
-        //console.log(this.parent.last_t);
+        
+        this.m = mat4.multiply(this.m,this.ma,this.mn);*/
+
         return this.m;
     }
 

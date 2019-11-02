@@ -46,7 +46,7 @@ class XMLscene extends CGFscene {
         this.keysPressed=false; //used to avoid infinite key pressing, always assume one tap, and reset with realease
         
         //animation stuff
-        this.animation = new Animation(this); //todo check if it sends scene as argument
+        this.animation = new Animation(this); //todo check if is sending scene as argument
         
     }
 
