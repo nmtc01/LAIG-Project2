@@ -887,10 +887,11 @@ class MySceneGraph {
 
                 //Parse transformations
                 //create unit matrix 
+                
                 var translateMatrix = mat4.create();
                 var rotateMatrix = mat4.create();
                 var scaleMatrix = mat4.create();
-
+                
                 //TRANSLATE
                 if (grandgrandChildren[0].nodeName != "translate") {
                     this.onXMLMinorError("wrong tag <" + grandgrandChildren[0].nodeName + ">, on keyframe of instant " + keyframeInst + " from animation " + animationID);
@@ -934,9 +935,15 @@ class MySceneGraph {
 
                 //store keyframe
                 this.keyframe = [4];
+                /*
                 this.keyframe[0] = translateMatrix;
                 this.keyframe[1] = rotateMatrix;
                 this.keyframe[2] = scaleMatrix;
+                */
+                this.keyframe[0] = coordinatesTranslate;
+                this.keyframe[1] = [angle_x,angle_y,angle_z];
+                this.keyframe[2] = coordinatesScale;
+                
                 this.keyframe[3] = keyframeInst;
                 this.keyframes[j] = this.keyframe;
             }
@@ -1508,13 +1515,13 @@ class MySceneGraph {
 
         //Transformations
         this.scene.pushMatrix();
-        this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
+        //this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
         
         //TODO 
         //Animations 
         this.components[child].animation.set_mn(this.components[child].transformation);
-        this.components[child].animation.process_animation();
-        //this.scene.multMatrix(this.components[child].animation.process_animation());
+        //this.components[child].animation.process_animation(this.components[child].transformation);
+        this.scene.multMatrix( this.components[child].animation.process_animation());
         //this.scene.animation.apply();
         //this one I think:
         //this.components[child].animation.apply();
