@@ -55,7 +55,7 @@ class KeyFrameAnimaton extends Animation {
         }
 
         this.sent += 0.01; //chamado de 100 em 100 ms, comfimar mais tarde 
-
+        
         //check if should change to another keyframe    
         if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
             this.sent -= this.t[this.segment]; // reset sent 
@@ -106,24 +106,18 @@ class KeyFrameAnimaton extends Animation {
             let rz = Math.pow(finalKeyframeCoords[2]/initialKeyframeCoords[2], 1/this.t[this.segment]);
 
             S = [
-                this.keyframes[this.segment][2][0]*Math.pow(rx, this.instant),
-                this.keyframes[this.segment][2][1]*Math.pow(ry, this.instant),
-                this.keyframes[this.segment][2][2]*Math.pow(rz, this.instant)
+                this.keyframes[this.segment][2][0]*Math.pow(rx, this.sent),
+                this.keyframes[this.segment][2][1]*Math.pow(ry, this.sent),
+                this.keyframes[this.segment][2][2]*Math.pow(rz, this.sent)
             ];
         }
         else {
-            let keyframeCoords = [3];
-            keyframeCoords[0] = this.keyframes[this.segment][2][0];
-            keyframeCoords[1] = this.keyframes[this.segment][2][1];
-            keyframeCoords[2] = this.keyframes[this.segment][2][2];
-
             S = [
-                this.keyframes[this.segment][2][0]*keyframeCoords[0],
-                this.keyframes[this.segment][2][1]*keyframeCoords[1],
-                this.keyframes[this.segment][2][2]*keyframeCoords[2]
+                this.keyframes[this.segment][2][0],
+                this.keyframes[this.segment][2][1],
+                this.keyframes[this.segment][2][2]
             ];
         }
-        this.instant++;
 
         let scale_matrix = mat4.create();
         scale_matrix = mat4.scale(scale_matrix, scale_matrix, S);

@@ -62,11 +62,11 @@
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="2" y="2" z="2" />
             </keyframe>
-            <!-- <keyframe instant="15">
+            <keyframe instant="15">
                 <translate x="0" y="5" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
-            </keyframe> -->
+            </keyframe>
         </animation>
     </animations>
 
