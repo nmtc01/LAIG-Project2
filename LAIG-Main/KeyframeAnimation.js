@@ -117,46 +117,26 @@ class KeyFrameAnimaton extends Animation {
         //SCALE 
         let S = [];
 
-        if (this.segment < this.keyframes.length - 1) {
-            let initialKeyframeCoords = [3];
-            let finalKeyframeCoords = [3];
+        let initialKeyframeCoords = [3];
+        let finalKeyframeCoords = [3];
 
-            if (this.segment == 1 && this.keyframes[this.segment][3] != 0) {
-                initialKeyframeCoords[0] = 1;
-                initialKeyframeCoords[1] = 1;
-                initialKeyframeCoords[2] = 1;
+        initialKeyframeCoords[0] = this.keyframes[this.segment-1][2][0];
+        initialKeyframeCoords[1] = this.keyframes[this.segment-1][2][1];
+        initialKeyframeCoords[2] = this.keyframes[this.segment-1][2][2];
+            
+        finalKeyframeCoords[0] = this.keyframes[this.segment][2][0];
+        finalKeyframeCoords[1] = this.keyframes[this.segment][2][1];
+        finalKeyframeCoords[2] = this.keyframes[this.segment][2][2];        
 
-                finalKeyframeCoords[0] = this.keyframes[this.segment][2][0];
-                finalKeyframeCoords[1] = this.keyframes[this.segment][2][1];
-                finalKeyframeCoords[2] = this.keyframes[this.segment][2][2];
-            }
-            else {
-                initialKeyframeCoords[0] = this.keyframes[this.segment][2][0];
-                initialKeyframeCoords[1] = this.keyframes[this.segment][2][1];
-                initialKeyframeCoords[2] = this.keyframes[this.segment][2][2];
-                
-                finalKeyframeCoords[0] = this.keyframes[this.segment+1][2][0];
-                finalKeyframeCoords[1] = this.keyframes[this.segment+1][2][1];
-                finalKeyframeCoords[2] = this.keyframes[this.segment+1][2][2];
-            }
+        let rx = Math.pow(finalKeyframeCoords[0]/initialKeyframeCoords[0], 1/this.t[this.segment]);
+        let ry = Math.pow(finalKeyframeCoords[1]/initialKeyframeCoords[1], 1/this.t[this.segment]);
+        let rz = Math.pow(finalKeyframeCoords[2]/initialKeyframeCoords[2], 1/this.t[this.segment]);
 
-            let rx = Math.pow(finalKeyframeCoords[0]/initialKeyframeCoords[0], 1/this.t[this.segment]);
-            let ry = Math.pow(finalKeyframeCoords[1]/initialKeyframeCoords[1], 1/this.t[this.segment]);
-            let rz = Math.pow(finalKeyframeCoords[2]/initialKeyframeCoords[2], 1/this.t[this.segment]);
-
-            S = [
-                this.keyframes[this.segment][2][0]*Math.pow(rx, this.sent),
-                this.keyframes[this.segment][2][1]*Math.pow(ry, this.sent),
-                this.keyframes[this.segment][2][2]*Math.pow(rz, this.sent)
-            ];
-        }
-        else {
-            S = [
-                this.keyframes[this.segment][2][0],
-                this.keyframes[this.segment][2][1],
-                this.keyframes[this.segment][2][2]
-            ];
-        }
+        S = [
+            this.keyframes[this.segment-1][2][0]*Math.pow(rx, this.sent),
+            this.keyframes[this.segment-1][2][1]*Math.pow(ry, this.sent),
+            this.keyframes[this.segment-1][2][2]*Math.pow(rz, this.sent)
+        ];
 
         let scale_matrix = mat4.create();
         scale_matrix = mat4.scale(scale_matrix, scale_matrix, S);
