@@ -95,17 +95,18 @@ class KeyFrameAnimaton extends Animation {
             this.keyframes[this.segment][2][2]*this.progress_percentage
         ];
         let scale_matrix = mat4.create();
-        //scale_matrix = mat4.scale(scale_matrix, scale_matrix, S);
+        scale_matrix = mat4.scale(scale_matrix, scale_matrix, S);
     
 
         //multiply all matrixes
         let aux_mat = mat4.create(); 
+        aux_mat = mat4.multiply(aux_mat,aux_mat,scale_matrix);
         aux_mat = mat4.multiply(aux_mat,aux_mat,rotation_matrix);
         aux_mat = mat4.multiply(aux_mat,aux_mat,translate_matrix);
         //calculate matriz SRT 
         let ma = mat4.create();
         ma = mat4.multiply(ma,ma,aux_mat);
-        
+
         this.m = mat4.multiply(this.m,ma,this.mn);
       
         return this.m;
