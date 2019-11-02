@@ -91,7 +91,7 @@ class KeyFrameAnimaton extends Animation {
         //SCALE 
         let S = [];
 
-        if (this.segment < this.keyframes.length - 2) {
+        if (this.segment < this.keyframes.length - 1) {
             let initialKeyframeCoords = [3];
             initialKeyframeCoords[0] = this.keyframes[this.segment][2][0];
             initialKeyframeCoords[1] = this.keyframes[this.segment][2][1];
