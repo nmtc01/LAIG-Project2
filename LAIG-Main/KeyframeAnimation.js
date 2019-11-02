@@ -106,9 +106,9 @@ class KeyFrameAnimaton extends Animation {
             let rz = Math.pow(finalKeyframeCoords[2]/initialKeyframeCoords[2], 1/this.t[this.segment]);
 
             S = [
-                this.keyframes[this.segment][2][0]*rx,
-                this.keyframes[this.segment][2][1]*ry,
-                this.keyframes[this.segment][2][2]*rz
+                this.keyframes[this.segment][2][0]*Math.pow(rx, this.instant),
+                this.keyframes[this.segment][2][1]*Math.pow(ry, this.instant),
+                this.keyframes[this.segment][2][2]*Math.pow(rz, this.instant)
             ];
         }
         else {
@@ -123,6 +123,7 @@ class KeyFrameAnimaton extends Animation {
                 this.keyframes[this.segment][2][2]*keyframeCoords[2]
             ];
         }
+        this.instant++;
 
         let scale_matrix = mat4.create();
         scale_matrix = mat4.scale(scale_matrix, scale_matrix, S);
