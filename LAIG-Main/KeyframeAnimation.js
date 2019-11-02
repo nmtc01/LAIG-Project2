@@ -38,7 +38,6 @@ class KeyFrameAnimaton extends Animation {
     }
 
     set_mn(mn){
-       //this.mn = mat4.multiply(this.mn,this.mn, mn); 
        this.mn = mn;
     }
 
@@ -85,9 +84,9 @@ class KeyFrameAnimaton extends Animation {
             this.keyframes[this.segment][1][2]*this.progress_percentage
         ];
         let rotation_matrix = mat4.create();
-        /*rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[0],  [1, 0, 0]);
+        rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[0],  [1, 0, 0]);
         rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[1],  [0, 1, 0]);
-        rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[2],  [0, 0, 1]);*/
+        rotation_matrix = mat4.rotate(rotation_matrix , rotation_matrix , R[2],  [0, 0, 1]);
 
         //TODO SCALE 
         let S = [
@@ -101,13 +100,12 @@ class KeyFrameAnimaton extends Animation {
 
         //multiply all matrixes
         let aux_mat = mat4.create(); 
-        //aux_mat = mat4.multiply(aux_mat,aux_mat,rotation_matrix);
+        aux_mat = mat4.multiply(aux_mat,aux_mat,rotation_matrix);
         aux_mat = mat4.multiply(aux_mat,aux_mat,translate_matrix);
-        //calculate matriz SRT */
-        //this.ma = mat4.multiply(this.ma,this.ma,scale_matrix);
+        //calculate matriz SRT 
         let ma = mat4.create();
         ma = mat4.multiply(ma,ma,aux_mat);
-        //console.log(this.ma);
+        
         this.m = mat4.multiply(this.m,ma,this.mn);
       
         return this.m;
