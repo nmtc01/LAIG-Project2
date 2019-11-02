@@ -100,10 +100,15 @@ class KeyFrameAnimaton extends Animation {
        
         //ROTATE 
         let R = [
-            this.keyframes[this.segment][1][0] * this.progress_percentage,
-            this.keyframes[this.segment][1][1] * this.progress_percentage,
-            this.keyframes[this.segment][1][2] * this.progress_percentage
+            (this.keyframes[this.segment][1][0] - this.keyframes[this.segment-1][1][0]) * this.progress_percentage,
+            (this.keyframes[this.segment][1][1] - this.keyframes[this.segment-1][1][1]) * this.progress_percentage,
+            (this.keyframes[this.segment][1][2] - this.keyframes[this.segment-1][1][2]) * this.progress_percentage
         ];
+
+        R[0]+= this.keyframes[this.segment-1][1][0];
+        R[1]+= this.keyframes[this.segment-1][1][1];
+        R[2]+= this.keyframes[this.segment-1][1][2];
+
         let rotation_matrix = mat4.create();
         rotation_matrix = mat4.rotate(rotation_matrix, rotation_matrix, R[0], [1, 0, 0]);
         rotation_matrix = mat4.rotate(rotation_matrix, rotation_matrix, R[1], [0, 1, 0]);
