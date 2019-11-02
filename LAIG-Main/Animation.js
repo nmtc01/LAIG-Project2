@@ -18,7 +18,6 @@ class Animation{
         this.last_t=0;
         this.second=0; 
         
-        this.m=mat4.create();
     }
       /**
      * @method update
@@ -39,6 +38,7 @@ class Animation{
     apply(){
         this.scene.pushMatrix();
         this.scene.multMatrix(this.m);
+        //console.log(this.m);
         this.scene.popMatrix();
         //console.log(this.second);
     }

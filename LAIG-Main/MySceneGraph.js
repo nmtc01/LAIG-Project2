@@ -1503,13 +1503,15 @@ class MySceneGraph {
         this.components[child].visited = true; //set as visited
 
         this.scene.pushMatrix();
-        this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
+        //this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
 
+        //this.scene.popMatrix();
         //TODO 
         //Animations 
-        //this.components[child].animation.set_mn(this.components[child].transformation);
-        this.components[child].animation.process_animation();
-
+        //this.scene.pushMatrix();
+        this.components[child].animation.set_mn(this.components[child].transformation);
+        //this.components[child].animation.process_animation();
+        this.scene.multMatrix(this.components[child].animation.process_animation());
         //this.scene.animation.apply();
         //this one I think:
         //this.components[child].animation.apply();

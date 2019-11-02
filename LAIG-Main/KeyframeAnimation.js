@@ -23,6 +23,7 @@ class KeyFrameAnimaton extends Animation {
         //trans matrixes 
         this.ma = mat4.create();
         this.mn = mat4.create();
+        this.m=mat4.create();
         //translate -> rotate -> scale 
         this.keyframes = keyframes;
 
@@ -50,16 +51,16 @@ class KeyFrameAnimaton extends Animation {
     process_animation() {
         //stop excecution 
         if (this.segment > this.keyframes.length - 1) {
-            //console.log('nao da mais');
+            console.log('nao da mais');
             return;
         }
         
-        this.sent += 0.01; //chamado de 100 em 100 ms, comfimar mais tarde 
+        this.sent += 0.1; //chamado de 100 em 100 ms, comfimar mais tarde 
         //check if should change to anotern keyframe    
         if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
             this.sent -= this.t[this.segment]; // reset sent 
             if (this.segment + 1 > this.keyframes.length - 1) {
-                //console.log('nao da mais');
+                console.log('nao da mais');
                 return;
             }
         }
@@ -71,10 +72,19 @@ class KeyFrameAnimaton extends Animation {
         //calculate matriz SRT 
 
         //translate 
-        this.ma = mat4.multiply(this.ma,this.keyframes[this.segment][0],this.ma);//this.progress_percentage);
-        //console.log(this.ma);
-        this.m = mat4.multiply(this.mn,this.ma,this.m);
+        //this.ma = mat4.multiply(this.ma,this.keyframes[this.segment][0],1);//this.progress_percentage);
+        //hardcoded 
+        for( let i =0; i< 16; i++){
+            if(this.mn[i] != 0 && this.mn[i] != 1 && this.mn[i] != -1)
+               this.ma[i] = this.keyframes[this.segment][0][i] * this.progress_percentage; 
+            else this.ma[i] = this.mn[i]; 
+        }
+        console.log(this.ma);
+       //console.log(this.ma);
+        this.m = mat4.multiply(this.m,this.ma,this.mn);
+       //console.log(this.ma);
         //console.log(this.parent.last_t);
+        return this.m;
     }
 
 }
