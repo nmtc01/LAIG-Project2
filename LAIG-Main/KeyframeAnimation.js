@@ -69,7 +69,7 @@ class KeyFrameAnimaton extends Animation {
             return this.m;
         }
 
-        this.sent += 0.01; //chamado de 100 em 100 ms, comfimar mais tarde 
+        this.sent += 0.045; //chamado de 100 em 100 ms, comfimar mais tarde 
         
         //check if should change to another keyframe    
         if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
