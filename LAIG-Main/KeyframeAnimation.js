@@ -115,8 +115,6 @@ class KeyFrameAnimaton extends Animation {
         rotation_matrix = mat4.rotate(rotation_matrix, rotation_matrix, R[2], [0, 0, 1]);
 
         //SCALE 
-        let S = [];
-
         let initialKeyframeCoords = [3];
         let finalKeyframeCoords = [3];
 
@@ -132,7 +130,7 @@ class KeyFrameAnimaton extends Animation {
         let ry = Math.pow(finalKeyframeCoords[1]/initialKeyframeCoords[1], 1/this.t[this.segment]);
         let rz = Math.pow(finalKeyframeCoords[2]/initialKeyframeCoords[2], 1/this.t[this.segment]);
 
-        S = [
+        let S = [
             this.keyframes[this.segment-1][2][0]*Math.pow(rx, this.sent),
             this.keyframes[this.segment-1][2][1]*Math.pow(ry, this.sent),
             this.keyframes[this.segment-1][2][2]*Math.pow(rz, this.sent)

@@ -1497,16 +1497,19 @@ class MySceneGraph {
 
         //Transformations
         this.scene.pushMatrix();
-        //this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
+        if (this.components[child].animation == null)
+            this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
         
         //TODO 
         //Animations 
-        this.components[child].animation.set_mn(this.components[child].transformation);
-        //this.components[child].animation.process_animation(this.components[child].transformation);
-        this.scene.multMatrix(this.components[child].animation.process_animation());
-        //this.scene.animation.apply();
-        //this one I think:
-        //this.components[child].animation.apply();
+        if (this.components[child].animation != null) {
+            this.components[child].animation.set_mn(this.components[child].transformation);
+            //this.components[child].animation.process_animation(this.components[child].transformation);
+            this.scene.multMatrix(this.components[child].animation.process_animation());
+            //this.scene.animation.apply();
+            //this one I think:
+            //this.components[child].animation.apply();
+        }
         
 
         //Materials
