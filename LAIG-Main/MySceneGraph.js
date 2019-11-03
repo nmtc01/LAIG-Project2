@@ -931,7 +931,7 @@ class MySceneGraph {
             }
 
             //store animation
-            let animation = new KeyFrameAnimaton(animationID, this.keyframes);
+            let animation = new KeyFrameAnimaton(animationID, this.keyframes, this.scene);
             this.animations[animationID] = animation;
         }
         this.log("Parsed animations");
@@ -1504,11 +1504,8 @@ class MySceneGraph {
         //Animations 
         if (this.components[child].animation != null) {
             this.components[child].animation.set_mn(this.components[child].transformation);
-            //this.components[child].animation.process_animation(this.components[child].transformation);
-            this.scene.multMatrix(this.components[child].animation.process_animation());
-            //this.scene.animation.apply();
-            //this one I think:
-            //this.components[child].animation.apply();
+            this.components[child].animation.process_animation();
+            this.components[child].animation.apply();
         }
         
 

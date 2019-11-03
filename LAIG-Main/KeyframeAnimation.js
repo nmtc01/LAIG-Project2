@@ -9,8 +9,8 @@ class KeyFrameAnimaton extends Animation {
      * @param {int} id
      * @param {array} keyframe - array of arrays storing animaton keyframe + start instant 
      */
-    constructor(id, keyframes) {
-        super();
+    constructor(id, keyframes, scene) {
+        super(scene);
 
         this.sent = 0;
         this.segment = 0;

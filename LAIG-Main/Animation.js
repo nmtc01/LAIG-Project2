@@ -34,9 +34,7 @@ class Animation{
      * aplicar a transformação sobre a matriz de transformações da cena quando adequado 
      */
     apply(){
-        //this.scene.pushMatrix();
         this.scene.multMatrix(this.m);
-        //this.scene.popMatrix();
     }
 
 }
