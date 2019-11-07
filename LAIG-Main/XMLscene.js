@@ -34,7 +34,7 @@ class XMLscene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        this.setUpdatePeriod(100);
+        this.setUpdatePeriod(1000/60);
 
         //animation stuff 
         this.t=0; //current program time
@@ -44,9 +44,6 @@ class XMLscene extends CGFscene {
         this.lightSwitch = [true, false, false, false, false, false, false, false]; //array containing light states
         this.selectedCamera = 0; //store index of the selected camera
         this.keysPressed=false; //used to avoid infinite key pressing, always assume one tap, and reset with realease
-        
-        //animation stuff
-        this.animation = new Animation(this); //todo check if is sending scene as argument
         
     }
 
@@ -215,6 +212,14 @@ class XMLscene extends CGFscene {
         this.keysPressed = false; //reset flag when kley is released
         
     }
+    update(t){
+        for(var key in this.graph.components){
+            if (this.graph.components[key].animation != null){
+                    this.graph.components[key].animation.update(t);
+            }       
+        }
+    }
+
     /**
      * Displays the scene.
      */
@@ -252,9 +257,6 @@ class XMLscene extends CGFscene {
             // Displays the scene (MySceneGraph function).
             this.graph.displayScene();
         }
-        //update animations 
-        this.animation.update(this.t++);
-        
 
         this.popMatrix();
         // ---- END Background, camera and axis setup

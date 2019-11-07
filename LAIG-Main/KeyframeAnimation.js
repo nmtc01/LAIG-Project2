@@ -10,12 +10,18 @@ class KeyFrameAnimaton extends Animation {
      * @param {array} keyframe - array of arrays storing animaton keyframe + start instant 
      */
     constructor(id, keyframes, scene) {
-        super(scene);
-
+      
+        super(); 
+       this.id= id; 
+       this.scene=scene; 
+            
         this.sent = 0;
         this.segment = 0;
         this.progress_percentage = 0;
-        this.second_instant = 0;
+
+        //times 
+        this.delta_t = 0;
+        this.last_t = 0;
 
         //trans matrixes 
         this.mn = mat4.create();
@@ -31,12 +37,12 @@ class KeyFrameAnimaton extends Animation {
                 0
             ]
         ]; //keyframe 0 instant 
-        
-        for(let i =0;i < keyframes.length; i++){
+
+        for (let i = 0; i < keyframes.length; i++) {
             this.keyframes.push(keyframes[i]);
             console.log(i);
         }
-       
+
         console.log(this.keyframes);
         //this.keyframes= keyframes;
 
@@ -50,6 +56,16 @@ class KeyFrameAnimaton extends Animation {
             this.t.push(this.keyframes[i][3] - this.keyframes[i - 1][3]);
         }
         //NOTE first keyfram is set with sample values 
+    }
+
+    update(t) {
+        this.delta_t = t - this.last_t;
+        this.last_t = t;
+        console.log(this.delta_t);
+    }
+
+    apply() {
+        this.scene.multMatrix(this.m);
     }
 
     set_mn(mn) {
@@ -69,8 +85,8 @@ class KeyFrameAnimaton extends Animation {
             return this.m;
         }
 
-        this.sent += 0.045; //chamado de 100 em 100 ms, comfimar mais tarde 
-        
+        this.sent += 0.02; //chamado de 100 em 100 ms, comfimar mais tarde 
+
         //check if should change to another keyframe    
         if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
             this.sent -= this.t[this.segment]; // reset sent 
@@ -86,28 +102,28 @@ class KeyFrameAnimaton extends Animation {
         //TRANSLATE
         //calculate translation vector
         let T = [
-            (this.keyframes[this.segment][0][0] - this.keyframes[this.segment-1][0][0]) * this.progress_percentage,
-            (this.keyframes[this.segment][0][1] - this.keyframes[this.segment-1][0][1]) * this.progress_percentage,
-            (this.keyframes[this.segment][0][2] - this.keyframes[this.segment-1][0][2]) * this.progress_percentage
+            (this.keyframes[this.segment][0][0] - this.keyframes[this.segment - 1][0][0]) * this.progress_percentage,
+            (this.keyframes[this.segment][0][1] - this.keyframes[this.segment - 1][0][1]) * this.progress_percentage,
+            (this.keyframes[this.segment][0][2] - this.keyframes[this.segment - 1][0][2]) * this.progress_percentage
         ];
         //sum veector to intial pos 
-        T[0]+= this.keyframes[this.segment-1][0][0];
-        T[1]+= this.keyframes[this.segment-1][0][1];
-        T[2]+= this.keyframes[this.segment-1][0][2];
+        T[0] += this.keyframes[this.segment - 1][0][0];
+        T[1] += this.keyframes[this.segment - 1][0][1];
+        T[2] += this.keyframes[this.segment - 1][0][2];
 
         let translate_matrix = mat4.create();
         translate_matrix = mat4.translate(translate_matrix, translate_matrix, T);
-       
+
         //ROTATE 
         let R = [
-            (this.keyframes[this.segment][1][0] - this.keyframes[this.segment-1][1][0]) * this.progress_percentage,
-            (this.keyframes[this.segment][1][1] - this.keyframes[this.segment-1][1][1]) * this.progress_percentage,
-            (this.keyframes[this.segment][1][2] - this.keyframes[this.segment-1][1][2]) * this.progress_percentage
+            (this.keyframes[this.segment][1][0] - this.keyframes[this.segment - 1][1][0]) * this.progress_percentage,
+            (this.keyframes[this.segment][1][1] - this.keyframes[this.segment - 1][1][1]) * this.progress_percentage,
+            (this.keyframes[this.segment][1][2] - this.keyframes[this.segment - 1][1][2]) * this.progress_percentage
         ];
 
-        R[0]+= this.keyframes[this.segment-1][1][0];
-        R[1]+= this.keyframes[this.segment-1][1][1];
-        R[2]+= this.keyframes[this.segment-1][1][2];
+        R[0] += this.keyframes[this.segment - 1][1][0];
+        R[1] += this.keyframes[this.segment - 1][1][1];
+        R[2] += this.keyframes[this.segment - 1][1][2];
 
         let rotation_matrix = mat4.create();
         rotation_matrix = mat4.rotate(rotation_matrix, rotation_matrix, R[0], [1, 0, 0]);
@@ -118,22 +134,22 @@ class KeyFrameAnimaton extends Animation {
         let initialKeyframeCoords = [3];
         let finalKeyframeCoords = [3];
 
-        initialKeyframeCoords[0] = this.keyframes[this.segment-1][2][0];
-        initialKeyframeCoords[1] = this.keyframes[this.segment-1][2][1];
-        initialKeyframeCoords[2] = this.keyframes[this.segment-1][2][2];
-            
+        initialKeyframeCoords[0] = this.keyframes[this.segment - 1][2][0];
+        initialKeyframeCoords[1] = this.keyframes[this.segment - 1][2][1];
+        initialKeyframeCoords[2] = this.keyframes[this.segment - 1][2][2];
+
         finalKeyframeCoords[0] = this.keyframes[this.segment][2][0];
         finalKeyframeCoords[1] = this.keyframes[this.segment][2][1];
-        finalKeyframeCoords[2] = this.keyframes[this.segment][2][2];        
+        finalKeyframeCoords[2] = this.keyframes[this.segment][2][2];
 
-        let rx = Math.pow(finalKeyframeCoords[0]/initialKeyframeCoords[0], 1/this.t[this.segment]);
-        let ry = Math.pow(finalKeyframeCoords[1]/initialKeyframeCoords[1], 1/this.t[this.segment]);
-        let rz = Math.pow(finalKeyframeCoords[2]/initialKeyframeCoords[2], 1/this.t[this.segment]);
+        let rx = Math.pow(finalKeyframeCoords[0] / initialKeyframeCoords[0], 1 / this.t[this.segment]);
+        let ry = Math.pow(finalKeyframeCoords[1] / initialKeyframeCoords[1], 1 / this.t[this.segment]);
+        let rz = Math.pow(finalKeyframeCoords[2] / initialKeyframeCoords[2], 1 / this.t[this.segment]);
 
         let S = [
-            this.keyframes[this.segment-1][2][0]*Math.pow(rx, this.sent),
-            this.keyframes[this.segment-1][2][1]*Math.pow(ry, this.sent),
-            this.keyframes[this.segment-1][2][2]*Math.pow(rz, this.sent)
+            this.keyframes[this.segment - 1][2][0] * Math.pow(rx, this.sent),
+            this.keyframes[this.segment - 1][2][1] * Math.pow(ry, this.sent),
+            this.keyframes[this.segment - 1][2][2] * Math.pow(rz, this.sent)
         ];
 
         let scale_matrix = mat4.create();
@@ -150,10 +166,9 @@ class KeyFrameAnimaton extends Animation {
 
         this.m = mat4.multiply(this.m, ma, this.mn);
 
-        
+
         return this.m;
 
     }
 
 }
-//TODO primeiro keyframe sempre igual a zero

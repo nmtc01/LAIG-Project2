@@ -1508,7 +1508,6 @@ class MySceneGraph {
             this.components[child].animation.apply();
         }
         
-
         //Materials
         if (this.components[child].component_materials == 'inherit') { //if inherit does nothing, keeps the current material, from the parent 
             if (parent_material == null)
