@@ -40,11 +40,7 @@ class KeyFrameAnimaton extends Animation {
 
         for (let i = 0; i < keyframes.length; i++) {
             this.keyframes.push(keyframes[i]);
-            console.log(i);
         }
-
-        console.log(this.keyframes);
-        //this.keyframes= keyframes;
 
         this.instant = this.keyframes[0][3]; //first keyframe passed with instant stored in 3rd index
 
@@ -64,7 +60,6 @@ class KeyFrameAnimaton extends Animation {
         this.delta_t = t - this.last_t;
         this.last_t = t;
         this.sent = this.delta_t/1000 + this.sent;
-        console.log(this.sent);
     }
 
     apply() {
@@ -92,7 +87,9 @@ class KeyFrameAnimaton extends Animation {
         //check if should change to another keyframe    
         if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
             this.sent -= this.t[this.segment]; // reset sent 
-            this.segment++;
+            let result = Math.ceil(this.sent / this.t[this.segment]);
+            //this.segment++;
+            this.segment += result;
             if (this.segment > this.keyframes.length - 1) {
                 return this.m;
             }
