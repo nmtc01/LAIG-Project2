@@ -48,7 +48,7 @@ class KeyFrameAnimaton extends Animation {
 
         this.instant = this.keyframes[0][3]; //first keyframe passed with instant stored in 3rd index
 
-        this.segment = 0; //keyframe using numeration
+        this.segment = 1; //keyframe using numeration
 
         //make segment time array 
         this.t = [this.instant];
@@ -59,9 +59,12 @@ class KeyFrameAnimaton extends Animation {
     }
 
     update(t) {
+        if(this.last_t == 0)
+            this.last_t = t; 
         this.delta_t = t - this.last_t;
         this.last_t = t;
-        console.log(this.delta_t);
+        this.sent = this.delta_t/1000 + this.sent;
+        console.log(this.sent);
     }
 
     apply() {
@@ -81,24 +84,23 @@ class KeyFrameAnimaton extends Animation {
 
         //stop excecution 
         if (this.segment > this.keyframes.length - 1) {
-            console.log('nao da mais');
             return this.m;
         }
 
-        this.sent += 0.02; //chamado de 100 em 100 ms, comfimar mais tarde 
-
+        //chamado de 100 em 100 ms, comfimar mais tarde 
+    
         //check if should change to another keyframe    
         if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
             this.sent -= this.t[this.segment]; // reset sent 
             this.segment++;
             if (this.segment > this.keyframes.length - 1) {
-                console.log('nao da mais');
                 return this.m;
             }
         }
 
         this.progress_percentage = this.sent / this.t[this.segment]; //percentage
-
+        if(this.sent == 0)
+            this.progress_percentage=0;
         //TRANSLATE
         //calculate translation vector
         let T = [
