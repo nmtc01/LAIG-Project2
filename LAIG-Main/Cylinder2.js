@@ -11,7 +11,7 @@ class Cylinder2 extends CGFobject{
         this.base= base;
         this.top= top; 
         this.height= height; 
-        this.NPartsU= slices; 
+        this.NPartsU= slices/2; 
         this.NPartsV= stacks;
 
         this.init();
@@ -21,7 +21,7 @@ class Cylinder2 extends CGFobject{
         let degree1 = this.NPartsU - 1;
         let degree2 = this.NPartsV - 1;
 
-        let d_theta = (Math.PI)/this.NPartsU;
+        let d_theta = Math.PI/this.NPartsU;
 		let d_stack = this.height/this.NPartsV;
 		let d_radius = (this.base-this.top)/this.height;
 		
