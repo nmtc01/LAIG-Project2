@@ -34,7 +34,7 @@ class XMLscene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.axis = new CGFaxis(this);
-        this.setUpdatePeriod(1000/60);
+        this.setUpdatePeriod(60);
 
         //animation stuff 
         this.t=0; //current program time

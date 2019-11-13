@@ -1,0 +1,90 @@
+<lxs>
+    <scene root="root" axis_length="5" />
+
+    <views default="defaultcamera" >
+        <perspective id="defaultCamera" near="0.1" far="500" angle="45">
+            <from x="0" y="10" z="10" />
+            <to x="0" y="-2" z="0" />
+        </perspective>
+    </views>
+
+    <globals>  
+        <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
+        <background r="0.0" g="0.0" b="0.0" a="1.0" />
+    </globals>
+
+    <lights>
+        <omni id="demoLight" enabled="1">
+            <location x="9.8" y="11.9" z="10" w="1.0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+            <attenuation constant="1" linear="0" quadratic="0" />
+        </omni>
+        <spot id="spotLight" enabled="1" angle="90" exponent="2">
+            <location x="10" y="20" z="0" w="0" />
+            <target x="-10" y="0" z="0" />
+            <ambient r="0" g="0" b="0" a="1.0" />
+            <diffuse r="0" g="0" b="0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+            <attenuation constant="0" linear="1" quadratic="0" />
+        </spot>
+    </lights>
+
+    <textures>
+        <texture id="iron" file="scenes/images/iron.png" />  
+    </textures>
+
+    <materials> 
+        <material id="blueMetal" shininess="10">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.0" g="0.0" b="0.3" a="1.0" />
+            <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />
+        </material>
+    </materials>
+
+    <transformations>
+        <transformation id="translateSuperior">
+            <translate x="0" y="0.3" z="0" />
+        </transformation>
+    </transformations>
+
+    <animations>
+    </animations>
+
+    <primitives>
+          <primitive id="myCylinder2">
+           <cylinder2 base="1" top="1" height="1" slices="1" stacks="1" />
+        </primitive> 
+      <primitive id="myPatch">
+            <patch npointsU="2" npointsV="2" npartsU="4" npartsV="4" >
+                <controlpoint xx="0" yy="0" zz="0" />
+                <controlpoint xx="0" yy="0" zz="0" />
+                <controlpoint xx="0" yy="0" zz="0" />
+                <controlpoint xx="0" yy="0" zz="0" />
+            </patch>
+        </primitive>  
+        <primitive id="myPlane">
+            <plane npartsU="5" npartsV="8" />
+        </primitive>  
+         <primitive id="myTorus">
+            <torus inner="0.5" outer="1" slices="50" loops="50" />
+        </primitive>  
+    </primitives >
+ 
+    <components>         
+        <component id="root">
+            <transformation>
+            </transformation>
+            <materials>
+                <material id="blueMetal" />
+            </materials>
+            <texture id="none" />
+            <children>
+                <primitiveref id="myPlane" />
+            </children>
+        </component>
+    </components>
+   
+</lxs>
