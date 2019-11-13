@@ -13,14 +13,13 @@ class Cylinder2 extends CGFobject{
         this.height= height; 
         this.NPartsU= slices/2; 
         this.NPartsV= stacks;
+        this.NPointsU= 2;
+        this.NPointsV= 3;
 
         this.init();
     }
 
     init(){
-        let degree1 = this.NPartsU - 1;
-        let degree2 = this.NPartsV - 1;
-
         let d_theta = Math.PI/this.NPartsU;
 		let d_stack = this.height/this.NPartsV;
 		let d_radius = (this.base-this.top)/this.height;
@@ -72,6 +71,9 @@ class Cylinder2 extends CGFobject{
             theta1 = 0;
             theta2 = Math.PI;
 		}
+
+        let degree1 = this.NPointsU - 1;
+        let degree2 = this.NPointsV - 1;
 
         this.surface1 = new CGFnurbsSurface(degree1, degree2, this.controlPoints1);
         this.surface2 = new CGFnurbsSurface(degree1, degree2, this.controlPoints2);
