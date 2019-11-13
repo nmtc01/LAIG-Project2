@@ -1191,26 +1191,20 @@ class MySceneGraph {
                             var coordinates = [];
                             var x= this.reader.getInteger(grandgrandChildren[i], 'xx');
                             var y= this.reader.getInteger(grandgrandChildren[i], 'yy');
-                            var z= this.reader.getInteger(grandgrandChildren[i], 'yy');
+                            var z= this.reader.getInteger(grandgrandChildren[i], 'zz');
 
                             coordinates.push(...[x, y, z]);
                             /*var coordinates = this.parseCoordinates3D(grandgrandChildren[i], "Primitive patch control point nr: " + i);
                             if (!Array.isArray(coordinates))
                                 return coordinates;
                                 */
-                               console.log(coordinates);
                             controlPoints.push(coordinates);
                     }
-
-                    console.log(grandgrandChildren);
-                    //get contorl points 
-
                     if(controlPoints.length != NPointsU * NPointsV)
                         return "unable to parse controlPoints of the primitive coordinates for ID = " + primitiveId + 
                             " Control Points declared = " + controlPoints.length + " but NPointsU * NPointsV = " + (NPointsU * NPartsV);
                     
-                    var patch = new Patch(this.scene, NPointsU, NPointsV,NPartsU,NPartsV,);
-
+                    var patch = new Patch(this.scene, NPointsU, NPointsV,NPartsU,NPartsV,controlPoints);
                     this.primitives[primitiveId] = patch;
                     break;
                 case ('cylinder2'): 
@@ -1246,7 +1240,6 @@ class MySceneGraph {
 
             }
         }
-        console.log(this.primitives);
         return null;
     }
 

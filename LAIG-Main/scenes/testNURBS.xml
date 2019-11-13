@@ -1,14 +1,14 @@
 <lxs>
     <scene root="root" axis_length="5" />
 
-    <views default="defaultcamera" >
+    <views default="defaultcamera">
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
             <from x="0" y="10" z="10" />
             <to x="0" y="-2" z="0" />
         </perspective>
     </views>
 
-    <globals>  
+    <globals>
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />
         <background r="0.0" g="0.0" b="0.0" a="1.0" />
     </globals>
@@ -32,10 +32,10 @@
     </lights>
 
     <textures>
-        <texture id="iron" file="scenes/images/iron.png" />  
+        <texture id="iron" file="scenes/images/iron.png" />
     </textures>
 
-    <materials> 
+    <materials>
         <material id="blueMetal" shininess="10">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="0.0" g="0.0" b="0.3" a="1.0" />
@@ -54,26 +54,32 @@
     </animations>
 
     <primitives>
-          <primitive id="myCylinder2">
-           <cylinder2 base="1" top="1" height="1" slices="1" stacks="1" />
-        </primitive> 
-      <primitive id="myPatch">
-            <patch npointsU="2" npointsV="2" npartsU="4" npartsV="4" >
-                <controlpoint xx="0" yy="0" zz="0" />
-                <controlpoint xx="0" yy="0" zz="0" />
-                <controlpoint xx="0" yy="0" zz="0" />
-                <controlpoint xx="0" yy="0" zz="0" />
+        <primitive id="myCylinder2">
+            <cylinder2 base="1" top="1" height="1" slices="1" stacks="1" />
+        </primitive>
+        <primitive id="myPatch">
+            <patch npointsU="5" npointsV="2" npartsU="30" npartsV="1">
+                <controlpoint xx="-3" yy="-2" zz="0"/>
+                <controlpoint xx="-3" yy="2" zz="0"/>
+                <controlpoint xx="-1.5" yy="-2" zz="1.5"/>
+                <controlpoint xx="-1.5" yy="2" zz="1.5"/>
+                <controlpoint xx="0" yy="-2" zz="0"/>
+                <controlpoint xx="0" yy="2" zz="0"/>
+                <controlpoint xx="1.5" yy="-2" zz="-1.5"/>
+                <controlpoint xx="1.5" yy="2" zz="-1.5"/>
+                <controlpoint xx="3" yy="-2" zz="0"/>
+                <controlpoint xx="3" yy="2" zz="0"/>
             </patch>
-        </primitive>  
+        </primitive>
         <primitive id="myPlane">
             <plane npartsU="10" npartsV="10" />
-        </primitive>  
-         <primitive id="myTorus">
+        </primitive>
+        <primitive id="myTorus">
             <torus inner="0.5" outer="1" slices="50" loops="50" />
-        </primitive>  
+        </primitive>
     </primitives >
- 
-    <components>         
+
+    <components>
         <component id="root">
             <transformation>
             </transformation>
@@ -82,9 +88,9 @@
             </materials>
             <texture id="none" />
             <children>
-                <primitiveref id="myPlane" />
+                <primitiveref id="myPatch" />
             </children>
         </component>
     </components>
-   
+
 </lxs>
