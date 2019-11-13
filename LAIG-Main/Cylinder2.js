@@ -18,8 +18,8 @@ class Cylinder2 extends CGFobject{
     }
 
     init(){
-        this.surface = new CGFnurbsSurface(1, 1, this.controlPoints);
-        this.cylinder2 = new CGFnurbsObject(this.scene, this.NPartsU, this.NPartsV, this.surface);
+        //this.surface = new CGFnurbsSurface(1, 1, this.controlPoints);
+        //this.cylinder2 = new CGFnurbsObject(this.scene, this.NPartsU, this.NPartsV, this.surface);
     }
 
     display(){
