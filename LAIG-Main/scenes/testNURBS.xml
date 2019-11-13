@@ -73,10 +73,7 @@
         </primitive>
         <primitive id="myPlane">
             <plane npartsU="10" npartsV="10" />
-        </primitive>
-        <primitive id="myTorus">
-            <torus inner="0.5" outer="1" slices="50" loops="50" />
-        </primitive>
+        </primitive>   
     </primitives >
 
     <components>

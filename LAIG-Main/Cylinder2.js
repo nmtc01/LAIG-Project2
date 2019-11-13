@@ -11,14 +11,19 @@ class Cylinder2 extends CGFobject{
         this.base= base;
         this.top= top; 
         this.height= height; 
-        this.slices= slices; 
-        this.stacks= stacks;
+        this.NPartsU= slices; 
+        this.NPartsV= stacks;
 
-        this.initBuffers();
+        this.init();
     }
 
-    initBuffers(){
+    init(){
+        this.surface = new CGFnurbsSurface(1, 1, this.controlPoints);
+        this.cylinder2 = new CGFnurbsObject(this.scene, this.NPartsU, this.NPartsV, this.surface);
+    }
 
+    display(){
+        this.cylinder2.display();
     }
 
     updateTexCoords(lg_s, lg_t) {
