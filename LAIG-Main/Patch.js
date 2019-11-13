@@ -14,7 +14,6 @@ class Patch extends CGFobject {
         this.NPartsV = NPartsV;
 
         this.controlPoints = controlPoints;
-        console.log(this.controlPoints)
         this.init();
     }
     init() {

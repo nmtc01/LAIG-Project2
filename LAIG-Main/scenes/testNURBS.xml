@@ -55,7 +55,7 @@
 
     <primitives>
         <primitive id="myCylinder2">
-            <cylinder2 base="1" top="1" height="1" slices="1" stacks="1" />
+            <cylinder2 base="1" top="1" height="3" slices="20" stacks="20" />
         </primitive>
         <primitive id="myPatch">
             <patch npointsU="5" npointsV="2" npartsU="30" npartsV="1">
@@ -85,7 +85,7 @@
             </materials>
             <texture id="none" />
             <children>
-                <primitiveref id="myPatch" />
+                <primitiveref id="myCylinder2" />
             </children>
         </component>
     </components>
