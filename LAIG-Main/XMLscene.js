@@ -15,11 +15,13 @@ class XMLscene extends CGFscene {
     }
 
     /**
-     * Initializes the scene, se    tting some WebGL defaults, initializing the camera and the axis.
+     * Initializes the scene, setting some WebGL defaults, initializing the camera and the axis.
      * @param {CGFApplication} application
      */
     init(application) {
         super.init(application);
+
+        this.textureRTT = new CGFtextureRTT(this, this.gl.canvas.width, this.gl.canvas.height);
 
         this.sceneInited = false;
 
@@ -169,6 +171,8 @@ class XMLscene extends CGFscene {
             var texture = this.graph.textures[key];
             this.textures.push(texture);
         }
+
+        
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -181,7 +185,7 @@ class XMLscene extends CGFscene {
      */
     onGraphLoaded() {
         this.axis = new CGFaxis(this, this.graph.referenceLength);
-
+        
         this.gl.clearColor(this.graph.background[0], this.graph.background[1], this.graph.background[2], this.graph.background[3]);
 
         this.setGlobalAmbientLight(this.graph.globals[0], this.graph.globals[1], this.graph.globals[2], this.graph.globals[3]);
@@ -221,9 +225,9 @@ class XMLscene extends CGFscene {
     }
 
     /**
-     * Displays the scene.
+     * Renders the scene.
      */
-    display() {
+    render() {
         // ---- BEGIN Background, camera and axis setup
         
         // Clear image and depth buffer everytime we update the scene
@@ -260,5 +264,15 @@ class XMLscene extends CGFscene {
 
         this.popMatrix();
         // ---- END Background, camera and axis setup
+    }
+
+    /**
+     * Displays the scene.
+     */
+    display() {
+        this.textureRTT.attachToFrameBuffer();
+        this.render();
+        this.textureRTT.detachFromFrameBuffer();
+        this.render();
     }
 }
