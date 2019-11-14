@@ -1591,7 +1591,6 @@ class MySceneGraph {
         if (this.components[child].animation == null)
             this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
 
-        //TODO 
         //Animations 
         if (this.components[child].animation != null) {
             this.components[child].animation.set_mn(this.components[child].transformation);

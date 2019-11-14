@@ -228,7 +228,7 @@ class XMLscene extends CGFscene {
     /**
      * Renders the scene.
      */
-    render() {
+    render(securityCamera) {
         // ---- BEGIN Background, camera and axis setup
         
         // Clear image and depth buffer everytime we update the scene
@@ -261,7 +261,9 @@ class XMLscene extends CGFscene {
 
             // Displays the scene (MySceneGraph function).
             this.graph.displayScene();
+            this.securityCamera.display();
         }
+ 
 
         this.popMatrix();
         // ---- END Background, camera and axis setup
@@ -271,9 +273,12 @@ class XMLscene extends CGFscene {
      * Displays the scene.
      */
     display() {
+        this.gl.disable(this.gl.DEPTH_TEST);
         this.textureRTT.attachToFrameBuffer();
-        this.render();
+        this.render(this.securityCamera);
+        this.gl.enable(this.gl.DEPTH_TEST);
         this.textureRTT.detachFromFrameBuffer();
-        this.render();
+        this.render(this.securityCamera);
+
     }
 }
