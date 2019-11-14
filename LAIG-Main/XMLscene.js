@@ -45,6 +45,7 @@ class XMLscene extends CGFscene {
         this.selectedCamera = 0; //store index of the selected camera
         this.keysPressed=false; //used to avoid infinite key pressing, always assume one tap, and reset with realease
         
+        this.securityCamera = new MySecurityCamera(this, this.gl.canvas.width, this.gl.canvas.height);
     }
 
     initDefaultCamera() {
