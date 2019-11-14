@@ -14,7 +14,7 @@ class Cylinder2 extends CGFobject{
         this.NPartsU= stacks; 
         this.NPartsV= slices/2;
         this.NPointsU= 2;
-        this.NPointsV= 3;
+        this.NPointsV= 4;
 
         this.init();
     }
@@ -22,6 +22,7 @@ class Cylinder2 extends CGFobject{
     init(){
         let degree1 = this.NPointsU - 1;
         let degree2 = this.NPointsV - 1;
+        let h = 5.33; //calculated with algorythm of Casteljau
 
         this.controlPoints1 = [
             //U0
@@ -29,8 +30,10 @@ class Cylinder2 extends CGFobject{
                 //V0
                 [-this.base, 0, 0, 1],
                 //V1
-                [0, this.base, 0, 1],
+                [-this.base, h, 0, 1],
                 //V2
+                [this.base, h, 0, 1],
+                //V3
                 [this.base, 0, 0, 1]
             ],
             //U1
@@ -38,8 +41,10 @@ class Cylinder2 extends CGFobject{
                 //V0
                 [-this.base, 0, this.top, 1],
                 //V1
-                [0, this.base, this.top, 1],
+                [-this.base, h, this.top, 1],
                 //V2
+                [this.base, h, this.top, 1],
+                //V3
                 [this.base, 0, this.top, 1]
             ]
         ];
@@ -49,8 +54,10 @@ class Cylinder2 extends CGFobject{
                 //V0
                 [this.base, 0, 0, 1],
                 //V1
-                [0, -this.base, 0, 1],
+                [this.base, -h, 0, 1],
                 //V2
+                [-this.base, -h, 0, 1],
+                //V3
                 [-this.base, 0, 0, 1]
             ],
             //U1
@@ -58,8 +65,10 @@ class Cylinder2 extends CGFobject{
                 //V0
                 [this.base, 0, this.top, 1],
                 //V1
-                [0, -this.base, this.top, 1],
+                [this.base, -h, this.top, 1],
                 //V2
+                [-this.base, -h, this.top, 1],
+                //V3
                 [-this.base, 0, this.top, 1]
             ]
         ];
