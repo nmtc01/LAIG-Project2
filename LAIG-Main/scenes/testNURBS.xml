@@ -55,7 +55,7 @@
 
     <primitives>
         <primitive id="myCylinder2">
-            <cylinder2 base="4" top="4" height="3" slices="48" stacks="3" />
+            <cylinder2 base="3" top="1" height="3" slices="48" stacks="3" />
         </primitive>
         <primitive id="myPatch">
             <patch npointsU="5" npointsV="2" npartsU="30" npartsV="1">

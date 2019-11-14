@@ -22,7 +22,8 @@ class Cylinder2 extends CGFobject{
     init(){
         let degree1 = this.NPointsU - 1;
         let degree2 = this.NPointsV - 1;
-        let h = this.base*4/3; //calculated with algorythm of Casteljau
+        let h_base = this.base*4/3; //calculated with algorythm of Casteljau
+        let h_top = this.top*4/3;
 
         this.controlPoints1 = [
             //U0
@@ -30,22 +31,22 @@ class Cylinder2 extends CGFobject{
                 //V0
                 [-this.base, 0, 0, 1],
                 //V1
-                [-this.base, h, 0, 1],
+                [-this.base, h_base, 0, 1],
                 //V2
-                [this.base, h, 0, 1],
+                [this.base, h_base, 0, 1],
                 //V3
                 [this.base, 0, 0, 1]
             ],
             //U1
             [
                 //V0
-                [-this.base, 0, this.top, 1],
+                [-this.top, 0, this.height, 1],
                 //V1
-                [-this.base, h, this.top, 1],
+                [-this.top, h_top, this.height, 1],
                 //V2
-                [this.base, h, this.top, 1],
+                [this.top, h_top, this.height, 1],
                 //V3
-                [this.base, 0, this.top, 1]
+                [this.top, 0, this.height, 1]
             ]
         ];
         this.controlPoints2 = [
@@ -54,22 +55,22 @@ class Cylinder2 extends CGFobject{
                 //V0
                 [this.base, 0, 0, 1],
                 //V1
-                [this.base, -h, 0, 1],
+                [this.base, -h_base, 0, 1],
                 //V2
-                [-this.base, -h, 0, 1],
+                [-this.base, -h_base, 0, 1],
                 //V3
                 [-this.base, 0, 0, 1]
             ],
             //U1
             [
                 //V0
-                [this.base, 0, this.top, 1],
+                [this.top, 0, this.height, 1],
                 //V1
-                [this.base, -h, this.top, 1],
+                [this.top, -h_top, this.height, 1],
                 //V2
-                [-this.base, -h, this.top, 1],
+                [-this.top, -h_top, this.height, 1],
                 //V3
-                [-this.base, 0, this.top, 1]
+                [-this.top, 0, this.height, 1]
             ]
         ];
 
