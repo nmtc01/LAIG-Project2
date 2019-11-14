@@ -22,7 +22,7 @@ class Cylinder2 extends CGFobject{
     init(){
         let degree1 = this.NPointsU - 1;
         let degree2 = this.NPointsV - 1;
-        let h = 5.33; //calculated with algorythm of Casteljau
+        let h = this.base*4/3; //calculated with algorythm of Casteljau
 
         this.controlPoints1 = [
             //U0
