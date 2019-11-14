@@ -302,7 +302,7 @@
             <rectangle x1="-0.5" y1="-1" x2="0.5" y2="1" />
         </primitive>
         <primitive id="myPatch">
-            <patch npointsU="5" npointsV="2" npartsU="30" npartsV="1">
+            <patch npointsU="5" npointsV="2" npartsU="30" npartsV="30">
                 <controlpoint xx="-3" yy="-2" zz="0"/>
                 <controlpoint xx="-3" yy="2" zz="0"/>
                 <controlpoint xx="-1.5" yy="-2" zz="1.5"/>
