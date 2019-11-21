@@ -288,7 +288,7 @@
                 <rotate angle_x="45" angle_y="60" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
-            <keyframe instant="15.1">
+            <keyframe instant="15.5">
                 <translate x="0" y="-100" z="100" />
                 <rotate angle_x="45" angle_y="60" angle_z="-90" />
                 <scale x="0.1" y="0.1" z="0.1" />
