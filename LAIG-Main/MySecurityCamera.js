@@ -1,22 +1,30 @@
 class MySecurityCamera extends CGFobject {
-    constructor(scene, width, height) {
+    constructor(scene,textureRTT) { //passar um shader por causa da cor e gradientes 
         super(scene); 
 
-        this.x2 = width
-        this.y2 = height;
-        this.x1 = width - width / 4;
-        this.y1 = height - height / 4;
-        console.log(this.x1 + ' ' + this.y1 + ' ' +  this.x2 + ' ' + this.y2)
-        //this.rectangle = new MyRectangle(scene,this.x1, this.x2, this.y1, this.y2); // ocupa 1/4 largura e altura do ecra, no canto inferior direito do ecra 
-        console.log(scene); 
-        this.rectangle = new MyRectangle(scene,0,-10, 10, -10, 10); // ocupa 1/4 largura e altura do ecra, no canto inferior direito do ecra 
-        this.vertex = 0;
-        this.fragment_shader = 0;
+        this.textureRTT = textureRTT;
+
+        this.rectangle = new MyRectangle(scene,1,-0.5,0.5,-0.5,0.5); // ocupa 1/4 largura e altura do ecra, no canto inferior direito do ecra 
+        
+        //shader
+        this.shader = new CGFshader(scene.gl,"shaders/securitycamera.vert","shaders/securitycamera.frag"); 
+       
+        this.shader.setUniformsValues({ uSampler: 1 });
     }
 
     display() {
-        //aplicar textura RTT criada no retangulo
-        this.rectangle.display(); 
+        //update texture
+        this.material =new CGFappearance(this.scene);
+        this.material.setAmbient(1,1,1,1); 
+        this.material.setTexture(this.textureRTT);
+        this.material.apply();
+
+        this.scene.setActiveShader(this.shader);      
+        this.scene.pushMatrix();   
+        this.scene.scale(1,-1,1);
+        this.rectangle.display();         
+        this.scene.popMatrix();
+        this.scene.setActiveShader(this.scene.defaultShader);
     }
 
 }

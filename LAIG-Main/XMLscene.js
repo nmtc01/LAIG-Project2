@@ -47,7 +47,8 @@ class XMLscene extends CGFscene {
         this.selectedCamera = 0; //store index of the selected camera
         this.keysPressed=false; //used to avoid infinite key pressing, always assume one tap, and reset with realease
         
-        this.securityCamera = new MySecurityCamera(this, this.gl.canvas.width, this.gl.canvas.height);
+        this.securityCamera = new MySecurityCamera(this,this.textureRTT);
+
     }
 
     initDefaultCamera() {
@@ -228,8 +229,9 @@ class XMLscene extends CGFscene {
     /**
      * Renders the scene.
      */
-    render(securityCamera) {
+    render(camera) {
         // ---- BEGIN Background, camera and axis setup
+        this.camera = camera;
         
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -241,13 +243,14 @@ class XMLscene extends CGFscene {
 
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
-        this.views;
+        //this.views;
 
         this.pushMatrix();
         if (this.displayAxis) //display only if the curent interface state allows
             this.axis.display();
 
         this.checkKeys();
+
         this.updateLights(); //always update light state
 
         for (var i = 0; i < this.lights.length; i++) {
@@ -261,7 +264,6 @@ class XMLscene extends CGFscene {
 
             // Displays the scene (MySceneGraph function).
             this.graph.displayScene();
-            this.securityCamera.display();
         }
  
 
@@ -273,12 +275,16 @@ class XMLscene extends CGFscene {
      * Displays the scene.
      */
     display() {
-        this.gl.disable(this.gl.DEPTH_TEST);
+
         this.textureRTT.attachToFrameBuffer();
-        this.render(this.securityCamera);
-        this.gl.enable(this.gl.DEPTH_TEST);
+        this.render(this.camera); //call RTT camera
         this.textureRTT.detachFromFrameBuffer();
-        this.render(this.securityCamera);
+        this.render(this.camera); //call scene camera
+
+        this.gl.disable(this.gl.DEPTH_TEST);
+        new MySecurityCamera(this, this.textureRTT).display();
+        this.gl.enable(this.gl.DEPTH_TEST);
+
 
     }
 }
