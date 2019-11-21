@@ -16,7 +16,7 @@ void main() {
     //dym rectangle  - done 
     vec4 fragColor = vec4(color.rgb * 2.0 * (0.5-sqrt((vTextureCoord.x-0.5)*(vTextureCoord.x-0.5)+(vTextureCoord.y-0.5)*(vTextureCoord.y-0.5))),1.0);
     //noise
-    if(mod(vAtualTextureCoord.y * 10.0+timeFactor, 2.0) > 1.0) {
+    if(mod(vAtualTextureCoord.y * 10.0, 2.0) > 1.0) {
         color = vec4(color.rgb*0.5,1.0);
     }
        
