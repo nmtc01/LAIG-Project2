@@ -4,7 +4,7 @@ class MySecurityCamera extends CGFobject {
 
         this.textureRTT = textureRTT;
 
-        this.rectangle = new MyRectangle(scene,1,0.5,-0.5,0.5,-0.5); // ocupa 1/4 largura e altura do ecra, no canto inferior direito do ecra 
+        this.rectangle = new MyRectangle(scene,1,-0.5,0.5,-0.5,0.5); // ocupa 1/4 largura e altura do ecra, no canto inferior direito do ecra 
         
         //shader
         this.shader = new CGFshader(scene.gl,"shaders/securitycamera.vert","shaders/securitycamera.frag"); 
@@ -20,7 +20,7 @@ class MySecurityCamera extends CGFobject {
         this.material.apply();
 
         this.scene.setActiveShader(this.shader);      
-        this.scene.pushMatrix();   
+        this.scene.pushMatrix();  
         this.rectangle.display();         
         this.scene.popMatrix();
         this.scene.setActiveShader(this.scene.defaultShader);
