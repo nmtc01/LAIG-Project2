@@ -51,9 +51,10 @@ class XMLscene extends CGFscene {
 
     }
 
-    initDefaultCamera() {
+    initDefaultCamera() { // todo create default camera
         //default camera 
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0)); 
+        this.secondaryCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0)); 
     }
     /**
      * Initializes the scene cameras.
@@ -61,6 +62,7 @@ class XMLscene extends CGFscene {
     initCameras() {
         //array to store enabled cameras, got from from views
         this.cameras = {};
+        this.secondaryCameras = {}; 
         this.cameraIDs = [];
         let aux = true;
         //loop to iterate throught cameras read on xml, this loop was originaly made on the file presented
@@ -73,6 +75,7 @@ class XMLscene extends CGFscene {
                             var auxCam = new CGFcamera(view.angle * DEGREE_TO_RAD, view.near, view.far,
                                 vec3.fromValues(...Object.values(view.from)), vec3.fromValues(...Object.values(view.to)));
                             this.cameras[view.viewId] = auxCam;
+                            this.secondaryCameras[view.viewId] = auxCam;
                             this.cameraIDs.push(view.viewId);
                             break;
                         }
@@ -81,6 +84,7 @@ class XMLscene extends CGFscene {
                             var auxCam = new CGFcameraOrtho(view.left, view.right, view.bottom, view.top, view.near, view.far,
                                 vec3.fromValues(...Object.values(view.from)), vec3.fromValues(...Object.values(view.to)), vec3.fromValues(...Object.values(view.up)));
                             this.cameras[view.viewId] = auxCam;
+                            this.secondaryCameras[view.viewId] = auxCam;
                             this.cameraIDs.push(view.viewId);
                             break;
                         }
@@ -88,6 +92,7 @@ class XMLscene extends CGFscene {
                 //set the first camera passed as the deafult one 
                 if (aux) {
                     this.camera = this.cameras[view.viewId];
+                    this.secondaryCamera = this.secondaryCameras[view.viewId];
                     this.interface.setActiveCamera(this.cameras[view.viewId]); //set camera
                     aux = false; //so the program only do this condition once
                 }
@@ -99,9 +104,15 @@ class XMLscene extends CGFscene {
             return "no cameras were defined";
     }
     //Update camera upon change on interface
-    updateCameras(val) {
+    updateSceneCameras(val) {
         this.camera = this.cameras[val]; //get the camera using val passed on the interface, set as main camera
         this.interface.setActiveCamera(this.cameras[val]); //set the camera
+        console.log(this.camera)
+    }
+    updateSecondaryCameras(val) {
+        this.secondaryCamera = this.cameras[val]; //get the camera using val passed on the interface, set as main camera
+        this.interface.setActiveCamera(this.secondaryCameras[val]); //set the camera
+        console.log(this.secondaryCamera)
     }
     /**
      * Initializes the scene lights with the values read from the XML file.
@@ -232,7 +243,6 @@ class XMLscene extends CGFscene {
      */
     render(camera) {
         // ---- BEGIN Background, camera and axis setup
-        this.camera = camera;
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -266,7 +276,6 @@ class XMLscene extends CGFscene {
             this.graph.displayScene();
         }
  
-
         this.popMatrix();
         // ---- END Background, camera and axis setup
     }
@@ -279,12 +288,11 @@ class XMLscene extends CGFscene {
         this.textureRTT.attachToFrameBuffer();
         this.render(this.camera); //call RTT camera
         this.textureRTT.detachFromFrameBuffer();
-        this.render(this.camera); //call scene camera
+        this.render(this.secondaryCamera); //call scene camera
 
         this.gl.disable(this.gl.DEPTH_TEST);
         this.securityCamera.display();
         this.gl.enable(this.gl.DEPTH_TEST);
-
 
     }
 }

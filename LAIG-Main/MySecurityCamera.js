@@ -10,8 +10,6 @@ class MySecurityCamera extends CGFobject {
         this.shader = new CGFshader(scene.gl,"shaders/securitycamera.vert","shaders/securitycamera.frag"); 
        
         this.shader.setUniformsValues({ uSampler: 1 });
-
-
     }
 
     display() {
@@ -30,7 +28,6 @@ class MySecurityCamera extends CGFobject {
     }
 
     update(t){
-        this.time = t/500 % 1000;
-        console.log(this.time)
+        this.time = t/500 % 1000; //todo check if time is correct later 
     }
 }
