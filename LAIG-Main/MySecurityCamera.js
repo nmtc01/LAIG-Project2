@@ -3,7 +3,7 @@ class MySecurityCamera extends CGFobject {
         super(scene); 
 
         this.textureRTT = textureRTT;
-
+        this.time=0; 
         this.rectangle = new MyRectangle(scene,1,-0.5,0.5,-0.5,0.5);
     
         //shader
@@ -13,6 +13,8 @@ class MySecurityCamera extends CGFobject {
     }
 
     display() {
+        console.log(this.time);
+        this.shader.setUniformsValues({ timeFactor: this.time});
         //update texture
         this.material =new CGFappearance(this.scene);
         this.material.setAmbient(1,1,1,1); 
@@ -27,6 +29,6 @@ class MySecurityCamera extends CGFobject {
     }
 
     update(t){
-        this.shader.setUniformsValues({ timeFactor: t });
+        this.time = t *0.0001;
     }
 }
