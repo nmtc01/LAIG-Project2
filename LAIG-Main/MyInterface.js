@@ -55,7 +55,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'selectedCamera', this.scene.cameraIDs)
             .name('Scene Camera:')
             .onChange(val => this.scene.updateSceneCameras(val));
-        this.gui.add(this.scene, 'selectedCamera', this.scene.cameraIDs)
+        this.gui.add(this.scene, 'selectedSecondaryCamera', this.scene.cameraSecondaryIDs)
             .name('Secondary Camera:')
             .onChange(val => this.scene.updateSecondaryCameras(val));
         //create folder with lights

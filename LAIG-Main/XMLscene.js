@@ -45,6 +45,7 @@ class XMLscene extends CGFscene {
         this.displayAxis = true; //axis state
         this.lightSwitch = [true, false, false, false, false, false, false, false]; //array containing light states
         this.selectedCamera = 0; //store index of the selected camera
+        this.selectedSecondaryCamera = 0;
         this.keysPressed=false; //used to avoid infinite key pressing, always assume one tap, and reset with realease
         
         this.securityCamera = new MySecurityCamera(this,this.textureRTT);
@@ -53,7 +54,7 @@ class XMLscene extends CGFscene {
 
     initDefaultCamera() { // todo create default camera
         //default camera 
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0)); 
+        this.camera = new CGFcamera(Math.PI/3, 0.1, 500, vec3.fromValues(50, 5, 70), vec3.fromValues(0, -10, 0)); 
         this.secondaryCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0)); 
     }
     /**
@@ -64,6 +65,7 @@ class XMLscene extends CGFscene {
         this.cameras = {};
         this.secondaryCameras = {}; 
         this.cameraIDs = [];
+        this.cameraSecondaryIDs = [];
         let aux = true;
         //loop to iterate throught cameras read on xml, this loop was originaly made on the file presented
         for (var key in this.graph.views) {
@@ -77,6 +79,7 @@ class XMLscene extends CGFscene {
                             this.cameras[view.viewId] = auxCam;
                             this.secondaryCameras[view.viewId] = auxCam;
                             this.cameraIDs.push(view.viewId);
+                            this.cameraSecondaryIDs.push(view.viewId);
                             break;
                         }
                     case ('ortho'):
@@ -86,14 +89,14 @@ class XMLscene extends CGFscene {
                             this.cameras[view.viewId] = auxCam;
                             this.secondaryCameras[view.viewId] = auxCam;
                             this.cameraIDs.push(view.viewId);
+                            this.cameraSecondaryIDs.push(view.viewId);
                             break;
                         }
                 }
                 //set the first camera passed as the deafult one 
                 if (aux) {
-                    this.camera = this.cameras[view.viewId];
+                    this.primaryCamera = this.cameras[view.viewId];
                     this.secondaryCamera = this.secondaryCameras[view.viewId];
-                    this.interface.setActiveCamera(this.cameras[view.viewId]); //set camera
                     aux = false; //so the program only do this condition once
                 }
 
@@ -105,14 +108,10 @@ class XMLscene extends CGFscene {
     }
     //Update camera upon change on interface
     updateSceneCameras(val) {
-        this.camera = this.cameras[val]; //get the camera using val passed on the interface, set as main camera
-        this.interface.setActiveCamera(this.cameras[val]); //set the camera
-        console.log(this.camera)
+        this.primaryCamera = this.cameras[val]; //get the camera using val passed on the interface, set as main camera
     }
     updateSecondaryCameras(val) {
         this.secondaryCamera = this.cameras[val]; //get the camera using val passed on the interface, set as main camera
-        this.interface.setActiveCamera(this.secondaryCameras[val]); //set the camera
-        console.log(this.secondaryCamera)
     }
     /**
      * Initializes the scene lights with the values read from the XML file.
@@ -247,6 +246,8 @@ class XMLscene extends CGFscene {
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
 
+        this.camera = camera;
+
         // Initialize Model-View matrix as identity (no transformation
         this.updateProjectionMatrix();
         this.loadIdentity();
@@ -286,9 +287,9 @@ class XMLscene extends CGFscene {
     display() {
 
         this.textureRTT.attachToFrameBuffer();
-        this.render(this.camera); //call RTT camera
+        this.render(this.secondaryCamera); //call RTT camera
         this.textureRTT.detachFromFrameBuffer();
-        this.render(this.secondaryCamera); //call scene camera
+        this.render(this.primaryCamera); //call scene camera
 
         this.gl.disable(this.gl.DEPTH_TEST);
         this.securityCamera.display();
