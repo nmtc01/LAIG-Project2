@@ -224,6 +224,7 @@ class XMLscene extends CGFscene {
                     this.graph.components[key].animation.update(t);
             }       
         }
+        this.securityCamera.update(t);
     }
 
     /**
@@ -281,7 +282,7 @@ class XMLscene extends CGFscene {
         this.render(this.camera); //call scene camera
 
         this.gl.disable(this.gl.DEPTH_TEST);
-        new MySecurityCamera(this, this.textureRTT).display();
+        this.securityCamera.display();
         this.gl.enable(this.gl.DEPTH_TEST);
 
 
