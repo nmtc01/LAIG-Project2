@@ -262,6 +262,8 @@ class XMLscene extends CGFscene {
 
         this.checkKeys();
 
+        this.interface.setActiveCamera(this.camera);
+
         this.updateLights(); //always update light state
 
         for (var i = 0; i < this.lights.length; i++) {
