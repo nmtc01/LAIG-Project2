@@ -231,7 +231,7 @@ class XMLscene extends CGFscene {
     update(t){
         for(var key in this.graph.components){
             if (this.graph.components[key].animation != null){
-                    this.graph.components[key].animation.update(t);
+                this.graph.components[key].animation.update(t);
             }       
         }
         this.securityCamera.update(t);
@@ -287,7 +287,7 @@ class XMLscene extends CGFscene {
      * Displays the scene.
      */
     display() {
-
+        if (this.sceneInited) {
         this.textureRTT.attachToFrameBuffer();
         this.render(this.secondaryCamera); //call RTT camera
         this.textureRTT.detachFromFrameBuffer();
@@ -296,6 +296,7 @@ class XMLscene extends CGFscene {
         this.gl.disable(this.gl.DEPTH_TEST);
         this.securityCamera.display();
         this.gl.enable(this.gl.DEPTH_TEST);
+        }
 
     }
 }

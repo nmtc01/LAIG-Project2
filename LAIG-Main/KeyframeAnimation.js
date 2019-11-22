@@ -98,6 +98,12 @@ class KeyFrameAnimaton extends Animation {
         this.progress_percentage = this.sent / this.t[this.segment]; //percentage
         if(this.sent == 0)
             this.progress_percentage=0;
+
+        if (this.progress_percentage < 0)
+            this.progress_percentage = 0;
+        else if (this.progress_percentage > 1)
+            this.progress_percentage = 1;
+
         //TRANSLATE
         //calculate translation vector
         let T = [
