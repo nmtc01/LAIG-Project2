@@ -1594,7 +1594,7 @@ class MySceneGraph {
         //Animations 
         if (this.components[child].animation != null) {
             this.components[child].animation.set_mn(this.components[child].transformation);
-            this.components[child].animation.process_animation();
+            //this.components[child].animation.process_animation();
             this.components[child].animation.apply();
         }
 
