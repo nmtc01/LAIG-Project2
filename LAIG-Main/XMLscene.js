@@ -288,14 +288,14 @@ class XMLscene extends CGFscene {
      */
     display() {
         if (this.sceneInited) {
-        this.textureRTT.attachToFrameBuffer();
-        this.render(this.secondaryCamera); //call RTT camera
-        this.textureRTT.detachFromFrameBuffer();
-        this.render(this.primaryCamera); //call scene camera
+            this.textureRTT.attachToFrameBuffer();
+            this.render(this.secondaryCamera); //call RTT camera
+            this.textureRTT.detachFromFrameBuffer();
+            this.render(this.primaryCamera); //call scene camera
 
-        this.gl.disable(this.gl.DEPTH_TEST);
-        this.securityCamera.display();
-        this.gl.enable(this.gl.DEPTH_TEST);
+            this.gl.disable(this.gl.DEPTH_TEST);
+            this.securityCamera.display();
+            this.gl.enable(this.gl.DEPTH_TEST);
         }
 
     }
