@@ -77,7 +77,6 @@ class KeyFrameAnimaton extends Animation {
     * @param {int} keyframe_num keyframe number operating
     */
     process_animation() {
-
         //stop excecution 
         if (this.segment > this.keyframes.length - 1) {
             return this.m;
@@ -87,7 +86,7 @@ class KeyFrameAnimaton extends Animation {
     
         //check if should change to another keyframe    
         if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
-            this.sent -= this.t[this.segment]; // reset sent 
+            this.sent -= this.t[this.segment]; // reset sent
             let result = Math.ceil(this.sent / this.t[this.segment]);
             //this.segment++;
             this.segment += result;
@@ -99,11 +98,6 @@ class KeyFrameAnimaton extends Animation {
         this.progress_percentage = this.sent / this.t[this.segment]; //percentage
         if(this.sent == 0)
             this.progress_percentage=0;
-
-        if (this.progress_percentage < 0)
-            this.progress_percentage = 0;
-        else if (this.progress_percentage > 1)
-            this.progress_percentage = 1;
 
         //TRANSLATE
         //calculate translation vector
@@ -171,7 +165,6 @@ class KeyFrameAnimaton extends Animation {
         ma = mat4.multiply(ma, ma, aux_mat);
 
         this.m = mat4.multiply(this.m, ma, this.mn);
-
 
         return this.m;
 

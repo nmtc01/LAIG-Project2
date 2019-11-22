@@ -230,7 +230,7 @@
     </transformations>
 
     <animations>
-        <animation id="test" >
+        <animation id="gyarados_anim" >
             <keyframe instant="15">
                 <translate x="-10" y="0" z="-10" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
@@ -1524,7 +1524,7 @@
                 <rotate axis="y" angle="30" />
                 <scale x="1" y="1" z="1" />
             </transformation>
-            <animationref id="test"/>
+            <animationref id="gyarados_anim"/>
             <materials>
                 <material id="blueGyarados" />
             </materials>
