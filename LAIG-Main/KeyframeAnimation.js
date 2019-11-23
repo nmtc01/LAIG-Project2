@@ -25,8 +25,6 @@ class KeyFrameAnimaton extends Animation {
         this.last_t = 0;
 
         //trans matrixes 
-        this.mn = mat4.create();
-        //this.ma = mat4.create();
         this.m = mat4.create();
 
         //translate -> rotate -> scale 
@@ -61,21 +59,14 @@ class KeyFrameAnimaton extends Animation {
         this.delta_t = t - this.last_t;
         this.last_t = t;
         this.sent = this.delta_t/1000 + this.sent;
-        //this.process_animation();
     }
 
     apply() {
         this.scene.multMatrix(this.m);
     }
 
-    set_mn(mn) {
-        this.mn = mn;
-    }
-
     /**
     * create ma
-    * @param {flat} progress_percentage - progress percentage
-    * @param {int} keyframe_num keyframe number operating
     */
     process_animation() {
         //stop excecution 
@@ -170,7 +161,7 @@ class KeyFrameAnimaton extends Animation {
         let ma = mat4.create();
         ma = mat4.multiply(ma, ma, aux_mat);
 
-        this.m = mat4.multiply(this.m, ma, this.mn);
+        this.m = ma;
 
         return this.m;
 
