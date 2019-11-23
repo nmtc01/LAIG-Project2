@@ -232,65 +232,85 @@
     <animations>
         <animation id="gyarados_anim" >
             <keyframe instant="15">
-                <translate x="-17" y="0" z="-10" />
+                <translate x="0" y="0" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="2" y="2" z="2" />
+                <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="15.5">
-                <translate x="-12" y="5" z="-2" />
+                <translate x="-0" y="0" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="3.5" y="3.5" z="3.5" />
             </keyframe>
         </animation>
         <animation id="splash" >
             <keyframe instant="0.3">
-                <translate x="0" y="5" z="-2" />
+                <translate x="5" y="0" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                  <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="0.6">
-                <translate x="0" y="0" z="-2" />
+                <translate x="0" y="0" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                  <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="0.9">
-                <translate x="0" y="5" z="-2" />
+                <translate x="5" y="0" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                  <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="1.2">
-                <translate x="0" y="0" z="-2" />
+                <translate x="0" y="0" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="1.5">
-                <translate x="0" y="5" z="-2" />
+                <translate x="5" y="0" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="1.8">
-                <translate x="0" y="-10" z="-2" />
+                <translate x="0" y="0" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                  <scale x="1" y="1" z="1" />
             </keyframe>
-            <keyframe instant="6">
-                <translate x="0" y="-10" z="-2" />
-                <rotate angle_x="45" angle_y="0" angle_z="-90" />
+            <keyframe instant="4">
+                <translate x="-20" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="5">
+                <translate x="0" y="-20" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="-90" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="7">
+                <translate x="0" y="1" z="0" />
+                <rotate angle_x="0" angle_y="20" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="8">
-                <translate x="40" y="-20" z="5" />
-                <rotate angle_x="45" angle_y="0" angle_z="-90" />
+                <translate x="0" y="4" z="10" />
+                <rotate angle_x="0" angle_y="-45" angle_z="-90" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="8.5">
+                <translate x="0" y="-20" z="0" />
+                <rotate angle_x="0" angle_y="-45" angle_z="-90" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="11">
+                <translate x="0" y="-20" z="0" />
+                <rotate angle_x="90" angle_y="0" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="15">
-                <translate x="0" y="-10" z="5" />
-                <rotate angle_x="45" angle_y="60" angle_z="-90" />
+                <translate x="0" y="-20" z="0" />
+                <rotate angle_x="90" angle_y="60" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="15.5">
-                <translate x="0" y="-10" z="5" />
-                <rotate angle_x="45" angle_y="60" angle_z="-90" />
+                <translate x="0" y="-20" z="0" />
+                <rotate angle_x="90" angle_y="80" angle_z="-90" />
                 <scale x="0.5" y="0.5" z="0.5" />
             </keyframe>
         
@@ -319,7 +339,7 @@
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="20">
-                <translate x="-10" y="0" z="-20" />
+                <translate x="-10" y="0" z="-10" />
                 <rotate angle_x="0" angle_y="-90" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
@@ -364,6 +384,70 @@
             </keyframe>
             <keyframe instant="20">
                 <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="bubbles_anim" >
+            <keyframe instant="1">
+                <translate x="0" y="1" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="2" z="1" />
+            </keyframe>
+            <keyframe instant="2">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="5">
+                <translate x="0" y="2" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="2" y="2" z="2" />
+            </keyframe>
+            <keyframe instant="8">
+                <translate x="0" y="1" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="0.5" />
+            </keyframe>
+            <keyframe instant="9">
+                <translate x="0" y="1" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="2" z="1" />
+            </keyframe>
+            <keyframe instant="10">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="12">
+                <translate x="0" y="2" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="2" y="2" z="2" />
+            </keyframe>
+            <keyframe instant="16">
+                <translate x="0" y="1" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="0.5" />
+            </keyframe>
+        </animation>
+        <animation id="bubble_random_anim">
+            <keyframe instant="1">
+                <translate x="1" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1.5" z="1" />
+            </keyframe>
+            <keyframe instant="2">
+                <translate x="0" y="0" z="-1" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="5">
+                <translate x="0" y="1" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="0.5" />
+            </keyframe>
+            <keyframe instant="8">
+                <translate x="1" y="0" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
@@ -1200,8 +1284,9 @@
 
         <component id="bubbleChain1">
             <transformation>
-                <translate x="0" y="-2" z="0" />
+                <translate x="0" y="-5" z="0" />
             </transformation>
+            <animationref id="bubbles_anim" />
             <materials>
                 <material id="inherit" />
             </materials>
@@ -1215,8 +1300,9 @@
 
         <component id="bubbleChain2">
             <transformation>
-                <translate x="-8" y="-3" z="-7" />
+                <translate x="-8" y="-6" z="-7" />
             </transformation>
+            <animationref id="bubbles_anim" />
             <materials>
                 <material id="inherit" />
             </materials>
@@ -1232,6 +1318,7 @@
             <transformation>
                 <translate x="-8" y="-9" z="7" />
             </transformation>
+            <animationref id="bubbles_anim" />
             <materials>
                 <material id="inherit" />
             </materials>
@@ -1245,8 +1332,9 @@
 
         <component id="bubbleChain4">
             <transformation>
-                <translate x="8" y="-5" z="7" />
+                <translate x="8" y="-8" z="7" />
             </transformation>
+            <animationref id="bubbles_anim" />
             <materials>
                 <material id="inherit" />
             </materials>
@@ -1260,8 +1348,9 @@
 
         <component id="bubbleChain5">
             <transformation>
-                <translate x="15" y="-3" z="-5" />
+                <translate x="15" y="-7" z="-5" />
             </transformation>
+            <animationref id="bubbles_anim" />
             <materials>
                 <material id="inherit" />
             </materials>
@@ -1306,6 +1395,7 @@
             <transformation>
                 <translate x="0" y="-3" z="0" />
             </transformation>
+            <animationref id="bubble_random_anim" />
             <materials>
                 <material id="inherit" />
             </materials>
@@ -1321,6 +1411,7 @@
             <transformation>
                 <scale x="0.3" y="0.3" z="0.3" />
             </transformation>
+            <animationref id="bubble_random_anim" />
             <materials>
                 <material id="inherit" />
             </materials>
@@ -1391,7 +1482,6 @@
          <component id="magikarp">
             <transformation>
                 <translate x="-10" y="1" z="10" />
-                <rotate axis="y" angle="-60" />
                 <rotate axis="z" angle="90" />
             </transformation>
             <animationref id="splash" />
