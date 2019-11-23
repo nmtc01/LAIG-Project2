@@ -843,13 +843,12 @@ class MySceneGraph {
         var children = animationsNode.children;
 
         this.animations = [];
-        this.keyframes = [];
-
-        var grandChildren = [];
-        var grandgrandChildren = [];
 
         // Any number of animations.
         for (let i = 0; i < children.length; i++) {
+            let grandChildren = [];
+            let grandgrandChildren = [];
+            this.keyframes = [];
 
             if (children[i].nodeName != "animation") {
                 this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");

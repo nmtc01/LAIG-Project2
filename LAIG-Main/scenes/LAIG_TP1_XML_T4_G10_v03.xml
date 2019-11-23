@@ -829,7 +829,7 @@
         <component id="cardume1">
             <transformation>
             </transformation>
-            <!--<animationref id="fish_anim" />-->
+            <animationref id="fish_anim" />
             <materials>
                 <material id="redScale" />
             </materials>
