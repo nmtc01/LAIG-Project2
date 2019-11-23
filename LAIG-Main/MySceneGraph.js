@@ -871,7 +871,7 @@ class MySceneGraph {
 
             // Any number of keyframes.
             for (let j = 0; j < grandChildren.length; j++) {
-                if (grandChildren[i].nodeName != "keyframe") {
+                if (grandChildren[j].nodeName != "keyframe") {
                     this.onXMLMinorError("unknown tag <" + children[j].nodeName + ">");
                     continue;
                 }

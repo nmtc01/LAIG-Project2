@@ -242,7 +242,7 @@
                 <scale x="3.5" y="3.5" z="3.5" />
             </keyframe>
         </animation>
-         <animation id="splash" >
+        <animation id="splash" >
             <keyframe instant="0.3">
                 <translate x="0" y="5" z="-2" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
@@ -293,7 +293,14 @@
                 <rotate angle_x="45" angle_y="60" angle_z="-90" />
                 <scale x="0.5" y="0.5" z="0.5" />
             </keyframe>
-         
+        
+        </animation>
+        <animation id="fish_anim" >
+            <keyframe instant="10">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="90" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
         </animation>
     </animations>
 
@@ -822,6 +829,7 @@
         <component id="cardume1">
             <transformation>
             </transformation>
+            <!--<animationref id="fish_anim" />-->
             <materials>
                 <material id="redScale" />
             </materials>
@@ -838,6 +846,7 @@
             <transformation>
                 <translate x="14" y="-3" z="-1" />
             </transformation>
+            <!--<animationref id="fish_anim" />-->
             <materials>
                 <material id="blueScale" />
             </materials>
@@ -855,6 +864,7 @@
                 <rotate axis="y" angle="-90" />
                 <translate x="14" y="-3" z="12" />
             </transformation>
+            <!--<animationref id="fish_anim" />-->
             <materials>
                 <material id="greenScale" />
             </materials>
