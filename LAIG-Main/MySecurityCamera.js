@@ -22,7 +22,9 @@ class MySecurityCamera extends CGFobject {
 
         this.scene.setActiveShader(this.shader);      
         this.scene.pushMatrix();  
-        this.rectangle.display();         
+        this.textureRTT.bind(0);
+        this.rectangle.display();     
+        this.textureRTT.unbind(0);    
         this.scene.popMatrix();
         this.scene.setActiveShader(this.scene.defaultShader);
     }
