@@ -79,13 +79,8 @@ class KeyFrameAnimaton extends Animation {
     */
     process_animation() {
         //stop excecution 
-        if (this.last_instant == 2) {
-            return this.m;
-        }
-
-        //last instant of last keyframe 
         if (this.segment > this.keyframes.length - 1) {
-            this.last_instant = 2;
+            return this.m;
         }
     
         //check if should change to another keyframe    
