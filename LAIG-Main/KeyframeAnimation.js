@@ -61,7 +61,7 @@ class KeyFrameAnimaton extends Animation {
         this.delta_t = t - this.last_t;
         this.last_t = t;
         this.sent = this.delta_t/1000 + this.sent;
-        this.process_animation();
+        //this.process_animation();
     }
 
     apply() {
