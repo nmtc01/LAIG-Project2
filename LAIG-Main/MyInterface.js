@@ -52,10 +52,10 @@ class MyInterface extends CGFinterface {
 
     updateInterface() {
         //create dropdown with cameras/view
-        this.gui.add(this.scene, 'selectedCamera', this.scene.cameraIDs)
+        this.gui.add(this.scene, 'selectedCamera', this.scene.primaryCameraIDs)
             .name('Scene Camera:')
             .onChange(val => this.scene.updateSceneCameras(val));
-        this.gui.add(this.scene, 'selectedSecondaryCamera', this.scene.cameraSecondaryIDs)
+        this.gui.add(this.scene, 'selectedSecondaryCamera', this.scene.secondaryCameraIDs)
             .name('Security Camera:')
             .onChange(val => this.scene.updateSecondaryCameras(val));
         //create folder with lights

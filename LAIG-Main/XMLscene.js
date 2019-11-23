@@ -62,10 +62,10 @@ class XMLscene extends CGFscene {
      */
     initCameras() {
         //array to store enabled cameras, got from from views
-        this.cameras = {};
+        this.primaryCameras = {};
         this.secondaryCameras = {}; 
-        this.cameraIDs = [];
-        this.cameraSecondaryIDs = [];
+        this.primaryCameraIDs = [];
+        this.secondaryCameraIDs = [];
         let aux = true;
         //loop to iterate throught cameras read on xml, this loop was originaly made on the file presented
         for (var key in this.graph.views) {
@@ -74,28 +74,32 @@ class XMLscene extends CGFscene {
                 switch (view.type) {
                     case ('perspective'):
                         {
-                            var auxCam = new CGFcamera(view.angle * DEGREE_TO_RAD, view.near, view.far,
+                            var auxPrimCam = new CGFcamera(view.angle * DEGREE_TO_RAD, view.near, view.far,
                                 vec3.fromValues(...Object.values(view.from)), vec3.fromValues(...Object.values(view.to)));
-                            this.cameras[view.viewId] = auxCam;
-                            this.secondaryCameras[view.viewId] = auxCam;
-                            this.cameraIDs.push(view.viewId);
-                            this.cameraSecondaryIDs.push(view.viewId);
+                            var auxSecCam = new CGFcamera(view.angle * DEGREE_TO_RAD, view.near, view.far,
+                                vec3.fromValues(...Object.values(view.from)), vec3.fromValues(...Object.values(view.to)));
+                            this.primaryCameras[view.viewId] = auxPrimCam;
+                            this.secondaryCameras[view.viewId] = auxSecCam;
+                            this.primaryCameraIDs.push(view.viewId);
+                            this.secondaryCameraIDs.push(view.viewId);
                             break;
                         }
                     case ('ortho'):
                         {
-                            var auxCam = new CGFcameraOrtho(view.left, view.right, view.bottom, view.top, view.near, view.far,
+                            var auxPrimCam = new CGFcameraOrtho(view.left, view.right, view.bottom, view.top, view.near, view.far,
                                 vec3.fromValues(...Object.values(view.from)), vec3.fromValues(...Object.values(view.to)), vec3.fromValues(...Object.values(view.up)));
-                            this.cameras[view.viewId] = auxCam;
-                            this.secondaryCameras[view.viewId] = auxCam;
-                            this.cameraIDs.push(view.viewId);
-                            this.cameraSecondaryIDs.push(view.viewId);
+                            var auxSecCam = new CGFcameraOrtho(view.left, view.right, view.bottom, view.top, view.near, view.far,
+                                vec3.fromValues(...Object.values(view.from)), vec3.fromValues(...Object.values(view.to)), vec3.fromValues(...Object.values(view.up)));
+                            this.primaryCameras[view.viewId] = auxPrimCam;
+                            this.secondaryCameras[view.viewId] = auxSecCam;
+                            this.primaryCameraIDs.push(view.viewId);
+                            this.secondaryCameraIDs.push(view.viewId);
                             break;
                         }
                 }
                 //set the first camera passed as the deafult one 
                 if (aux) {
-                    this.primaryCamera = this.cameras[view.viewId];
+                    this.primaryCamera = this.primaryCameras[view.viewId];
                     this.secondaryCamera = this.secondaryCameras[view.viewId];
                     aux = false; //so the program only do this condition once
                 }
@@ -103,15 +107,15 @@ class XMLscene extends CGFscene {
             }
         }
         //at least one camere needs to be defined
-        if (this.cameras.length != 0)
+        if (this.primaryCameras.length != 0)
             return "no cameras were defined";
     }
     //Update camera upon change on interface
     updateSceneCameras(val) {
-        this.primaryCamera = this.cameras[val]; //get the camera using val passed on the interface, set as main camera
+        this.primaryCamera = this.primaryCameras[val]; //get the camera using val passed on the interface, set as main camera
     }
     updateSecondaryCameras(val) {
-        this.secondaryCamera = this.cameras[val]; //get the camera using val passed on the interface, set as main camera
+        this.secondaryCamera = this.secondaryCameras[val]; //get the camera using val passed on the interface, set as main camera   
     }
     /**
      * Initializes the scene lights with the values read from the XML file.
@@ -260,9 +264,7 @@ class XMLscene extends CGFscene {
         if (this.displayAxis) //display only if the curent interface state allows
             this.axis.display();
 
-        this.checkKeys();
-
-        this.interface.setActiveCamera(this.camera);
+        this.checkKeys();        
 
         this.updateLights(); //always update light state
 
@@ -292,6 +294,7 @@ class XMLscene extends CGFscene {
             this.render(this.secondaryCamera); //call RTT camera
             this.textureRTT.detachFromFrameBuffer();
             this.render(this.primaryCamera); //call scene camera
+            this.interface.setActiveCamera(this.primaryCamera);
 
             this.gl.disable(this.gl.DEPTH_TEST);
             this.securityCamera.display();
