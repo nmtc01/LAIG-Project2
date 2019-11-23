@@ -294,10 +294,76 @@
             </keyframe>
         
         </animation>
-        <animation id="fish_anim" >
+        <animation id="cardume_anim1" >
+            <keyframe instant="10">
+                <translate x="0" y="0" z="1" />
+                <rotate angle_x="0" angle_y="90" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="15">
+                <translate x="-10" y="0" z="0" />
+                <rotate angle_x="0" angle_y="90" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="25">
+                <translate x="-15" y="0" z="1" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="cardume_anim2" >
+            <keyframe instant="10">
+                <translate x="-10" y="0" z="0" />
+                <rotate angle_x="0" angle_y="-90" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="20">
+                <translate x="-10" y="0" z="-20" />
+                <rotate angle_x="0" angle_y="-90" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="fish_anim1" >
+            <keyframe instant="5">
+                <translate x="1" y="-5" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
             <keyframe instant="10">
                 <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="90" angle_z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="15">
+                <translate x="1" y="-2" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="20">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+        </animation>
+        <animation id="fish_anim2" >
+            <keyframe instant="5">
+                <translate x="5" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="10">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="15">
+                <translate x="5" y="-2" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="20">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>
@@ -829,7 +895,7 @@
         <component id="cardume1">
             <transformation>
             </transformation>
-            <animationref id="fish_anim" />
+            <animationref id="cardume_anim1" />
             <materials>
                 <material id="redScale" />
             </materials>
@@ -846,7 +912,7 @@
             <transformation>
                 <translate x="14" y="-3" z="-1" />
             </transformation>
-            <!--<animationref id="fish_anim" />-->
+            <animationref id="cardume_anim1" />
             <materials>
                 <material id="blueScale" />
             </materials>
@@ -864,7 +930,7 @@
                 <rotate axis="y" angle="-90" />
                 <translate x="14" y="-3" z="12" />
             </transformation>
-            <!--<animationref id="fish_anim" />-->
+            <animationref id="cardume_anim2" />
             <materials>
                 <material id="greenScale" />
             </materials>
@@ -881,6 +947,7 @@
             <transformation>
                 <translate x="-2" y="-5" z="-0.3" />
             </transformation>
+            <animationref id="fish_anim1" />
             <materials>
                 <material id="inherit" />
             </materials>
@@ -904,6 +971,7 @@
             <transformation>
                 <translate x="-3" y="-7" z="-0.3" />
             </transformation>
+            <animationref id="fish_anim2" />
              <materials>
                 <material id="inherit" />
             </materials>
@@ -927,6 +995,7 @@
             <transformation>
                 <translate x="-3" y="-4" z="-1" />
             </transformation>
+            <animationref id="fish_anim2" />
             <materials>
                 <material id="inherit" />
             </materials>
