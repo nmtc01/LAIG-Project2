@@ -214,7 +214,13 @@
          <material id="yellow" shininess="1">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="1.0" g="0.99" b="0.65" a="1.0" />
-            <diffuse r="1.0" g="0.99" b="0.65.0" a="1.0" />
+            <diffuse r="1.0" g="0.99" b="0.65" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+         <material id="shiny_magikarp" shininess="1">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.9" g="0.77" b="0.40" a="1.0" />
+            <diffuse r="0.9" g="0.77" b="0.40" a="1.0" />
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
 
@@ -269,10 +275,10 @@
                 <rotate angle_x="5" angle_y="0" angle_z="0" />
                 <scale x="1.5" y="1.5" z="1.5" />
             </keyframe>
-            <keyframe instant="3.1">
-                <translate x="0" y="0" z="0" />
+            <keyframe instant="3.5">
+                <translate x="0" y="0.1" z="3" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="0" y="0" z="0" /> 
+                <scale x="8" y="8" z="8" /> 
             </keyframe>
         </animation>
         <animation id="gyarados_anim" >
@@ -285,6 +291,14 @@
                 <translate x="-12" y="5" z="-2" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="3.5" y="3.5" z="3.5" />
+            </keyframe>
+        
+        </animation>
+        <animation id="fish_anim" >
+            <keyframe instant="10">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="90" angle_z="0" />
+                <scale x="1" y="1" z="1" />
             </keyframe>
         </animation>
     </animations>
@@ -815,6 +829,7 @@
         <component id="cardume1">
             <transformation>
             </transformation>
+            <animationref id="fish_anim" />
             <materials>
                 <material id="redScale" />
             </materials>
@@ -831,6 +846,7 @@
             <transformation>
                 <translate x="14" y="-3" z="-1" />
             </transformation>
+            <!--<animationref id="fish_anim" />-->
             <materials>
                 <material id="blueScale" />
             </materials>
@@ -848,6 +864,7 @@
                 <rotate axis="y" angle="-90" />
                 <translate x="14" y="-3" z="12" />
             </transformation>
+            <!--<animationref id="fish_anim" />-->
             <materials>
                 <material id="greenScale" />
             </materials>
@@ -1312,7 +1329,7 @@
            <animationref id="magikarp_anim"/>
             <materials>
                 <material id="red" />
-                <material id="yellow" />
+                <material id="shiny_magikarp" />
             </materials>
             <texture id="none" />
             <children>
@@ -1334,7 +1351,7 @@
                 <scale  x="1.5" y="1.9" z="2.5"/>
             </transformation>
             <materials>
-                <material id="red" />
+                <material id="inherit" />
             </materials>
             <texture id="none" />
             <children>
@@ -1349,6 +1366,7 @@
             </transformation>
             <materials>
                 <material id="lips" />
+                <material id="yellow" />
             </materials>
             <texture id="none" />
             <children>

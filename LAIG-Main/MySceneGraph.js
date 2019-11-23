@@ -843,13 +843,12 @@ class MySceneGraph {
         var children = animationsNode.children;
 
         this.animations = [];
-        this.keyframes = [];
-
-        var grandChildren = [];
-        var grandgrandChildren = [];
 
         // Any number of animations.
         for (let i = 0; i < children.length; i++) {
+            let grandChildren = [];
+            let grandgrandChildren = [];
+            this.keyframes = [];
 
             if (children[i].nodeName != "animation") {
                 this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
@@ -871,7 +870,7 @@ class MySceneGraph {
 
             // Any number of keyframes.
             for (let j = 0; j < grandChildren.length; j++) {
-                if (grandChildren[i].nodeName != "keyframe") {
+                if (grandChildren[j].nodeName != "keyframe") {
                     this.onXMLMinorError("unknown tag <" + children[j].nodeName + ">");
                     continue;
                 }
