@@ -1587,17 +1587,12 @@ class MySceneGraph {
 
         //Transformations
         this.scene.pushMatrix();
-        if (this.components[child].animation == null)
-            this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
+        this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
 
         //Animations 
         if (this.components[child].animation != null) {
-            let mn = this.components[child].transformation;
-            let ma = this.components[child].animation.process_animation();
-            let m = mat4.create();
-            m = mat4.multiply(m, ma, mn);
-            this.scene.multMatrix(m);
-            //this.components[child].animation.apply();
+            this.components[child].animation.process_animation();
+            this.components[child].animation.apply();
         }
 
         //Materials
