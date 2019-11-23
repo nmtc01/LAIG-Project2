@@ -232,66 +232,66 @@
     <animations>
         <animation id="gyarados_anim" >
             <keyframe instant="15">
-                <translate x="-10" y="0" z="-10" />
+                <translate x="-17" y="0" z="-10" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="2" y="2" z="2" />
             </keyframe>
             <keyframe instant="15.5">
                 <translate x="-12" y="5" z="-2" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="4" y="4" z="4" />
+                <scale x="3.5" y="3.5" z="3.5" />
             </keyframe>
         </animation>
          <animation id="splash" >
             <keyframe instant="0.3">
-                <translate x="0" y="5" z="0" />
+                <translate x="0" y="5" z="-2" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                  <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="0.6">
-                <translate x="0" y="0" z="0" />
+                <translate x="0" y="0" z="-2" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                  <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="0.9">
-                <translate x="0" y="5" z="0" />
+                <translate x="0" y="5" z="-2" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                  <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="1.2">
-                <translate x="0" y="0" z="0" />
+                <translate x="0" y="0" z="-2" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="1.5">
-                <translate x="0" y="5" z="0" />
+                <translate x="0" y="5" z="-2" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="1.8">
-                <translate x="0" y="-10" z="0" />
+                <translate x="0" y="-10" z="-2" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                  <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="6">
-                <translate x="0" y="-10" z="0" />
+                <translate x="0" y="-10" z="-2" />
                 <rotate angle_x="45" angle_y="0" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="8">
-                <translate x="40" y="-20" z="10" />
+                <translate x="40" y="-20" z="5" />
                 <rotate angle_x="45" angle_y="0" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="15">
-                <translate x="0" y="-10" z="10" />
+                <translate x="0" y="-10" z="5" />
                 <rotate angle_x="45" angle_y="60" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="15.5">
-                <translate x="0" y="-100" z="100" />
+                <translate x="0" y="-10" z="5" />
                 <rotate angle_x="45" angle_y="60" angle_z="-90" />
-                <scale x="0.1" y="0.1" z="0.1" />
+                <scale x="0.5" y="0.5" z="0.5" />
             </keyframe>
          
         </animation>
@@ -1520,7 +1520,7 @@
 
         <component id="gyarados">
             <transformation>
-                <translate x="15" y="-6" z="4" />
+                <translate x="15" y="-7" z="4" />
                 <rotate axis="y" angle="30" />
                 <scale x="1" y="1" z="1" />
             </transformation>

@@ -18,6 +18,7 @@ class KeyFrameAnimaton extends Animation {
         this.sent = 0;
         this.segment = 0;
         this.progress_percentage = 0;
+        this.last_instant = 0;
 
         //times 
         this.delta_t = 0;
@@ -78,18 +79,28 @@ class KeyFrameAnimaton extends Animation {
     */
     process_animation() {
         //stop excecution 
-        if (this.segment > this.keyframes.length - 1) {
+        if (this.last_instant == 2) {
             return this.m;
         }
 
-        //chamado de 100 em 100 ms, comfimar mais tarde 
+        //last instant of last keyframe 
+        if (this.segment > this.keyframes.length - 1) {
+            this.last_instant = 2;
+        }
     
         //check if should change to another keyframe    
-        if (this.sent > this.t[this.segment]) { //this.keyframes[this.segment][1] == t[segment]  
-            this.sent -= this.t[this.segment]; // reset sent
-            let result = Math.ceil(this.sent / this.t[this.segment]);
-            //this.segment++;
-            this.segment += result;
+        if (this.sent > this.t[this.segment]) { 
+            if (this.last_instant == 0) {
+                this.sent = this.t[this.segment];
+                this.last_instant = 1;
+            }
+            else {
+                if (this.last_instant == 1) //not last instant of keyframe anymore
+                    this.last_instant = 0;
+                this.sent -= this.t[this.segment]; // reset sent
+                let result = Math.ceil(this.sent / this.t[this.segment]);
+                this.segment += result;
+            }
             if (this.segment > this.keyframes.length - 1) {
                 return this.m;
             }
