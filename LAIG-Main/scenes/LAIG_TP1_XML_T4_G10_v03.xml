@@ -1284,7 +1284,7 @@
 
         <component id="bubbleChain1">
             <transformation>
-                <translate x="0" y="-5" z="0" />
+                <translate x="0" y="-8" z="0" />
             </transformation>
             <animationref id="bubbles_anim" />
             <materials>
@@ -1300,7 +1300,7 @@
 
         <component id="bubbleChain2">
             <transformation>
-                <translate x="-8" y="-6" z="-7" />
+                <translate x="-8" y="-7" z="-7" />
             </transformation>
             <animationref id="bubbles_anim" />
             <materials>
@@ -1348,7 +1348,7 @@
 
         <component id="bubbleChain5">
             <transformation>
-                <translate x="15" y="-7" z="-5" />
+                <translate x="15" y="-10" z="-5" />
             </transformation>
             <animationref id="bubbles_anim" />
             <materials>
