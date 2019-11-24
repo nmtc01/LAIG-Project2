@@ -83,9 +83,15 @@ class KeyFrameAnimaton extends Animation {
             else {
                 if (this.last_instant == 1) //not last instant of keyframe anymore
                     this.last_instant = 0;
-                this.sent -= this.t[this.segment]; // reset sent
-                let result = Math.ceil(this.sent / this.t[this.segment]);
-                this.segment += result;
+                for (let i = this.segment; i < this.t.length-1; i++) {
+                    this.sent -= this.t[i]; // reset sent
+                    this.segment = i+1;
+                    if (this.sent < this.t[i+1]) {
+                        break;
+                    }
+                }
+                //let result = Math.ceil(this.sent / this.t[this.segment]);
+                //this.segment += result;
             }
             if (this.segment > this.keyframes.length - 1) {
                 return this.m;
