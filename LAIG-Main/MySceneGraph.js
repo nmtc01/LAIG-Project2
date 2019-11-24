@@ -1587,13 +1587,13 @@ class MySceneGraph {
 
         //Transformations
         this.scene.pushMatrix();
-
+        this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
         //Animations 
         if (this.components[child].animation != null) {
             this.components[child].animation.process_animation();
             this.components[child].animation.apply();
         }
-        this.scene.multMatrix(this.components[child].transformation);//apply tranformations 
+      
 
         //Materials
         if (this.components[child].component_materials == 'inherit') { //if inherit does nothing, keeps the current material, from the parent 
