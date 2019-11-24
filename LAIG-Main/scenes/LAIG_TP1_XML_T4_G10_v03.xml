@@ -86,6 +86,7 @@
         <texture id="floater" file="scenes/images/floater.png" />
         <texture id="water" file="scenes/images/water.jpg" />
         <texture id="eye" file="scenes/images/eye.png" />
+        <texture id="pokeball" file="scenes/images/pokeball.png" />  
     </textures>
 
     <materials>
@@ -213,7 +214,13 @@
          <material id="yellow" shininess="1">
             <emission r="0.0" g="0.0" b="0.0" a="1.0" />
             <ambient r="1.0" g="0.99" b="0.65" a="1.0" />
-            <diffuse r="1.0" g="0.99" b="0.65.0" a="1.0" />
+            <diffuse r="1.0" g="0.99" b="0.65" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+         <material id="shiny_magikarp" shininess="1">
+            <emission r="0.0" g="0.0" b="0.0" a="1.0" />
+            <ambient r="0.9" g="0.77" b="0.40" a="1.0" />
+            <diffuse r="0.9" g="0.77" b="0.40" a="1.0" />
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
 
@@ -230,81 +237,118 @@
     </transformations>
 
     <animations>
+         <animation id="throwPokeball" >
+            <keyframe instant="1">
+                <translate x="0" y="3" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="1.5">
+                <translate x="0" y="5" z="5" />
+                <rotate angle_x="-25" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="3">
+                <translate x="0" y="5" z="10" />
+                <rotate angle_x="5" angle_y="0" angle_z="0" />
+                <scale x="1.5" y="1.5" z="1.5" />
+            </keyframe>
+            <keyframe instant="3.1">
+                <translate x="0" y="0" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="0.1" y="0.1" z="0.1" /> 
+            </keyframe>
+        </animation>
         <animation id="gyarados_anim" >
-            <keyframe instant="15">
+            <keyframe instant="18">
                 <translate x="0" y="0" z="0" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
-            <keyframe instant="15.5">
+            <keyframe instant="18.5">
                 <translate x="-12" y="5" z="-3" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="3.5" y="3.5" z="3.5" />
             </keyframe>
         </animation>
-        <animation id="splash" >
-            <keyframe instant="0.3">
-                <translate x="0" y="5" z="0" />
+        <animation id="magikarp_anim" >
+            <keyframe instant="0.2">
+                <translate x="0" y="20" z="0" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="0.1" y="0.1" z="0.1" />
+            </keyframe>
+            <keyframe instant="3">
+                <translate x="0" y="20" z="10" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="0.1" y="0.1" z="0.1" />
+            </keyframe>
+            <keyframe instant="3.1">
+                <translate x="0" y="0" z="10" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" /> 
+            </keyframe>
+            <keyframe instant="3.4">
+                <translate x="0" y="5" z="10" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                  <scale x="1" y="1" z="1" />
             </keyframe>
-            <keyframe instant="0.6">
-                <translate x="0" y="0" z="0" />
+            <keyframe instant="3.7">
+                <translate x="0" y="0" z="10" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
-                 <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="0.9">
-                <translate x="0" y="5" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                 <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="1.2">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="1.5">
-                <translate x="0" y="5" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                <scale x="1" y="1" z="1" />
-            </keyframe>
-            <keyframe instant="1.8">
-                <translate x="0" y="0" z="0" />
-                <rotate angle_x="0" angle_y="0" angle_z="0" />
-                 <scale x="1" y="1" z="1" />
+                <scale x="1" y="1" z="1" /> 
             </keyframe>
             <keyframe instant="4">
-                <translate x="0" y="-20" z="0" />
+                <translate x="0" y="5" z="10" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                 <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="4.1">
+                <translate x="0" y="0" z="10" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="4.6">
+                <translate x="0" y="5" z="10" />
                 <rotate angle_x="0" angle_y="0" angle_z="0" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
             <keyframe instant="5">
-                <translate x="20" y="-10" z="0" />
+                <translate x="0" y="0" z="10" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" /> 
+            </keyframe>
+            <keyframe instant="7">
+                <translate x="0" y="-20" z="10" />
+                <rotate angle_x="0" angle_y="0" angle_z="0" />
+                <scale x="1" y="1" z="1" />
+            </keyframe>
+            <keyframe instant="8">
+                <translate x="20" y="-10" z="10" />
                 <rotate angle_x="0" angle_y="0" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
-            <keyframe instant="7">
+            <keyframe instant="10">
                 <translate x="20" y="-10" z="-1" />
                 <rotate angle_x="-20" angle_y="0" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
-            <keyframe instant="8">
-                <translate x="0" y="-10" z="-1" />
+            <keyframe instant="11">
+                <translate x="-8" y="-10" z="-1" />
                 <rotate angle_x="0" angle_y="0" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
-            <keyframe instant="11">
-                <translate x="0" y="-10" z="0" />
+            <keyframe instant="14">
+                <translate x="0" y="-10" z="10" />
                 <rotate angle_x="90" angle_y="0" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
-            <keyframe instant="15">
-                <translate x="0" y="-20" z="0" />
+            <keyframe instant="18">
+                <translate x="0" y="-20" z="10" />
                 <rotate angle_x="90" angle_y="110" angle_z="-90" />
                 <scale x="1" y="1" z="1" />
             </keyframe>
-            <keyframe instant="15.5">
-                <translate x="0" y="-20" z="0" />
+            <keyframe instant="18.5">
+                <translate x="0" y="-20" z="10" />
                 <rotate angle_x="90" angle_y="90" angle_z="-90" />
                 <scale x="0.5" y="0.5" z="0.5" />
             </keyframe>
@@ -585,6 +629,7 @@
                 <componentref id="mySuperior" />
                 <componentref id="myInferior" />
                 <componentref id="gyarados" />
+                <componentref id="pokeball" />
             </children>
         </component>
 
@@ -1456,7 +1501,6 @@
             <texture id="floater" length_s = "10" length_t="10"/>
             <children>
                 <componentref id="floaterBody" />
-               <!--<componentref id="floaterRope" />-->
             </children>
         </component> 
 
@@ -1476,12 +1520,14 @@
 
          <component id="magikarp">
             <transformation>
-                <translate x="-10" y="1" z="10" />
+                <translate x="0" y="-1" z="10" />
                 <rotate axis="z" angle="90" />
+                <scale x="1" y="1" z="1" />
             </transformation>
-            <animationref id="splash" />
+           <animationref id="magikarp_anim"/>
             <materials>
                 <material id="red" />
+                <material id="shiny_magikarp" />
             </materials>
             <texture id="none" />
             <children>
@@ -1503,7 +1549,7 @@
                 <scale  x="1.5" y="1.9" z="2.5"/>
             </transformation>
             <materials>
-                <material id="red" />
+                <material id="inherit" />
             </materials>
             <texture id="none" />
             <children>
@@ -1518,6 +1564,7 @@
             </transformation>
             <materials>
                 <material id="lips" />
+                <material id="yellow" />
             </materials>
             <texture id="none" />
             <children>
@@ -2458,6 +2505,24 @@
                 <primitiveref id="whisker" />
             </children>
         </component>
+
+        <component id="pokeball">
+           <transformation>
+                <translate x="0" y="0" z="0" />
+                <rotate axis="y" angle="-90" />
+                <rotate axis="x" angle="-90" />
+                <scale x="1" y="1" z="1" />
+            </transformation>
+            <animationref id="throwPokeball" />
+            <materials>
+                <material id="white" />
+            </materials>
+            <texture id="pokeball" length_s="1" length_t="1" />
+            <children>
+                <primitiveref id="mySphere" />
+            </children>
+        </component>
+
 
     </components>
 </lxs>
