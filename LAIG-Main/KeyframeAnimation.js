@@ -90,8 +90,6 @@ class KeyFrameAnimaton extends Animation {
                         break;
                     }
                 }
-                //let result = Math.ceil(this.sent / this.t[this.segment]);
-                //this.segment += result;
             }
             if (this.segment > this.keyframes.length - 1) {
                 return this.m;
