@@ -1614,6 +1614,8 @@ class MySceneGraph {
             //use parent texture
             parent_material.setTexture(parent_texture);
             parent_material.setTextureWrap('REPEAT', 'REPEAT');
+			this.components[child].texture.length_s = parent_length_s;
+            this.components[child].texture.length_t = parent_length_t;
         }
         if (this.components[child].texture.textureref == 'none') {
             //if null set nothing
